@@ -1,0 +1,5 @@
+<h1>Property#show</h1>
+<p>Find me in app/views/property/show.html.erb</p>
+
+<%= @property.string  %>
+<%= link_to "Track Property", trackings_path(tracking: {property_id: @property,user_id: current_user}), method: :post %>
