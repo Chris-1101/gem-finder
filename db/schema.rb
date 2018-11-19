@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_123318) do
+ActiveRecord::Schema.define(version: 2018_11_19_135713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "properties", force: :cascade do |t|
+    t.string "price"
+    t.string "integer"
+    t.string "location"
+    t.string "name"
+    t.string "area_value_url"
+    t.string "average_sold_price_1year"
+    t.string "crime_rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "trackings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "property_id"
+    t.string "integer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_trackings_on_property_id"
+    t.index ["user_id"], name: "index_trackings_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +49,6 @@ ActiveRecord::Schema.define(version: 2018_11_19_123318) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "trackings", "properties"
+  add_foreign_key "trackings", "users"
 end
