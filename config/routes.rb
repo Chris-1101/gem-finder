@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get "properties", to: "pages#properties"
+  get "about", to: "pages#about"
+  get "contact", to: "pages#contact"
+  get "home", to: "pages#home"
+
+
+
+
   get 'user/new'
   get 'user/create'
   get 'user/show'
