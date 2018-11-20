@@ -1,9 +1,38 @@
-<% @properties.each do |property| %>
+<hr />
 
-<%= property.price %>
-<%= property.address %>
-<%= image_tag property.photo %>
-<%= property.price %>
-<%= # statistic for show page: property.year %>
-<%= # statistic for show page: property.crime_rating %>
+<div class="property-card">
+  <div class="property-card-header">
+    <p>London SW5</p>
+    <h3>South Kensington</h3>
+  </div>
+  <div class="property-card-thumbnail" style="background-image: url('https://lid.zoocdn.com/354/255/7dee080b38b7e5c370dfc52c394a7b2c6f320a47.jpg')"></div>
+  <div class="property-card-content">
+    <div>
+      <h3>Collingham Road</h3>
+      <h6>£1,800,000</h6>
+    </div>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+      ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+      in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    </p>
+  </div>
+  <div class="property-card-footer">
+    <a>More Info</a>
+    <a>Track</a>
+  </div>
+</div>
+
+<% @properties.each do |property| %>
+  <hr />
+  <div>
+    <p>Name: <%= property.name %></p>
+    <p>Address: <%= property.address %></p>
+    <%= image_tag property.photo %>
+    <p>Price: <%= property.price %></p>
+    <!-- property.year
+    property.crime_rating -->
+  </div>
 <% end %>

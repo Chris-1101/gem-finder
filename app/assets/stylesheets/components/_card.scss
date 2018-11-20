@@ -1,0 +1,74 @@
+.property-card {
+  width: 600px;
+  background: white;
+  border: 1px solid $colour-dark;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: 'Sackers Gothic', sans-serif;
+    font-size: 32px;
+    letter-spacing: 3px;
+  }
+}
+
+.property-card-header {
+  padding: 25px 30px;
+
+  p {
+    margin-bottom: 5px;
+    font-family: 'Sackers Gothic', sans-serif;
+    text-transform: lowercase;
+  }
+}
+
+.property-card-thumbnail {
+  background-size: cover;
+  background-position: center;
+  height: 250px;
+}
+
+.property-card-content {
+  padding: 30px;
+  text-align: justify;
+
+  div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+
+  h6 {
+    margin: 0;
+  }
+}
+
+.property-card-footer {
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    display: inline-block;
+    width: 50%;
+    padding: 25px;
+    font-family: 'Sackers Gothic', sans-serif;
+    text-align: center;
+    cursor: pointer;
+    color: $colour-dark;
+
+    &:last-child {
+      background-color: $colour-dark;
+      color: $colour-light;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
