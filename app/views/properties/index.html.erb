@@ -1,9 +1,7 @@
 <h1>Welcome To Gemfinder!</h1>
 <% @properties.each do |property| %>
-<%= property.location %>
-<%= property.address %>
-<%= property.crime_rating %>
-<%= property.year %>
-<%= image_tag property.photo %>
+
 <%= property.price %>
+<%= property.address %>
+<%= image_tag property.photo %>
 <% end %>
