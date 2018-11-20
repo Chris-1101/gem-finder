@@ -33,7 +33,7 @@ class PropertiesController < ApplicationController
 
     @property = Property.find(params[:id])
     @crime_rates = []
-    @postcodes = postcodes.sample(5)
+    @postcodes = postcodes.sample(10)
     @postcodes.each { |postcode| @crime_rates << scrape_crime(postcode).gsub(/All Crime & ASB/, '') }
   end
 
