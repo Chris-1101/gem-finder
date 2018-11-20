@@ -7,6 +7,14 @@ class PropertiesController < ApplicationController
   def index
     @properties = []
     search_house
+    @properties = Property.where.not(latitude: nil, longitude: nil)
+
+    @markers = @properties.map do |property|
+      {
+        lng: property.longitude,
+        lat: property.latitude
+      }
+    end
   end
 
   def show
@@ -35,22 +43,10 @@ class PropertiesController < ApplicationController
     html_file = open(url).read
     html_doc = Nokogiri::HTML(html_file)
 
-    # for num in 6..12 do
-    # html_doc.search('.ranktable tr:nth-child(4)').text
-    # end
-
     p "scraped..."
     return html_doc.search('.ranktable tr:nth-child(4)').text.split("Detached").first
 
-    # html_doc.search('.ranktable table table-responsive').each do |element|
-    #   p element.text.strip
-      # puts element.attribute('href').value
-    # end
   end
-
-  # postcodes.each do |postcode|
-  #   scrape_crime(postcode)
-  # end
 
   def search_house
     url = "https://www.zoopla.co.uk/for-sale/property/london/?q=London&results_sort=newest_listings&search_source=home"
