@@ -3,3 +3,7 @@
 
 <%= @property.string  %>
 <%= link_to "Track Property", trackings_path(tracking: {property_id: @property,user_id: current_user}), method: :post %>
+
+<% @crime_rates.each_with_index do |rating, index| %>
+<br /><%= @postcodes[index] %>: <%= rating.to_i.round(2) %>
+<% end %>
