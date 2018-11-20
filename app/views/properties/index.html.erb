@@ -1,2 +1,7 @@
-<h1>Property#index</h1>
-<p>Find me in app/views/property/index.html.erb</p>
+<h1>Welcome To Gemfinder!</h1>
+<% @properties.each do |property| %>
+
+<%= property.price %>
+<%= property.address %>
+<%= image_tag property.photo %>
+<% end %>
