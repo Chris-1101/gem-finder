@@ -4,7 +4,7 @@ class CreateProperties < ActiveRecord::Migration[5.2]
       t.string :price
       t.string :integer
       t.string :location
-      t.string :string
+      t.string :name
       t.string :area_value_url
       t.string :integer
       t.string :average_sold_price_1year
