@@ -4,6 +4,19 @@ require 'json'
 require 'csv'
 
 class PropertiesController < ApplicationController
+  def new
+    @property = Property.new
+  end
+
+  def create
+    @property = Property.new(property_params)
+    if @property.save!
+      redirect_to property_path(@property)
+    else
+      render :new
+    end
+  end
+
   def index
     @properties = search_house
 
@@ -42,9 +55,10 @@ class PropertiesController < ApplicationController
     @postcodes.each { |postcode| @crime_rates << scrape_crime(postcode).gsub(/All Crime & ASB/, '') }
   end
 
+  private
+
   def scrape_crime(postcode)
     url = "https://www.ukcrimestats.com/Postcode/#{postcode}"
-
     html_file = open(url).read
     html_doc = Nokogiri::HTML(html_file)
 
@@ -69,5 +83,9 @@ class PropertiesController < ApplicationController
     end
 
     return properties
+  end
+
+  def property_params
+    params.require(:property).permit(:name, :address, :price, :photo)
   end
 end
