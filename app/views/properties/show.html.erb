@@ -1,9 +1,7 @@
 <h1>Property#show</h1>
 <p>Find me in app/views/property/show.html.erb</p>
 
-<%= @property.string  %>
+<%= @property.name  %>
 <%= link_to "Track Property", trackings_path(tracking: {property_id: @property,user_id: current_user}), method: :post %>
 
-<% @crime_rates.each_with_index do |rating, index| %>
-<br /><%= @postcodes[index] %>: <%= rating.to_i.round(2) %>
-<% end %>
+
