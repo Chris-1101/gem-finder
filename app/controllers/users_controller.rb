@@ -19,10 +19,20 @@ class UsersController < ApplicationController
   # def destroy
   # end
 
-  # def edit
-  # end
+  def edit
+    @user = current_user
+  end
 
-  # def update
-  # end
+  def update
+    @user = current_user
+    @user.update(user_params)
+  end
+
+private
+ def user_params
+  params.require(:user).permit(:name, :email, :photo, :password)
+ end
+
+
 end
 
