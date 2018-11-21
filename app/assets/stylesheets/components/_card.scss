@@ -1,8 +1,30 @@
+#properties-index {
+  .container {
+    width: auto;
+    margin: 0 0 20px 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .property-card {
-  width: 480px;
+  // width: 480px;
+  position: relative;
   background: white;
   border: 1px solid $colour-dark;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  margin: 20px;
 
   h3 {
     margin-top: 0;
@@ -32,6 +54,7 @@
 
 .property-card-content {
   padding: 30px;
+  // min-height: 250px;
   text-align: justify;
 
   div:first-child {
@@ -50,8 +73,8 @@
   }
 
   p {
-    font-size: 15px;
-    line-height: 1.3em;
+    font-size: 16px;
+    line-height: 1.4em;
   }
 }
 
@@ -78,4 +101,30 @@
       text-decoration: none;
     }
   }
+}
+
+.property-card-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2;
+  background: $colour-dark;
+  opacity: 0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 0.05;
+  }
+}
+
+.property-card-track {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 65px;
+  z-index: 3;
+  background: transparent;
 }
