@@ -107,3 +107,13 @@ body {
     }
   }
 }
+.flexbox {
+  display: flex;
+  align-items: center;
+}
+.profiles {
+  display: block;
+  margin: 10px auto;
+  width: 70%;
+}
+

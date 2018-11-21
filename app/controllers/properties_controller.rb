@@ -78,12 +78,11 @@ class PropertiesController < ApplicationController
       photo = element.search('.photo-hover img').attr('src').value
       description = element.search('.listing-results-attr + p').text
       price = element.search('.listing-results-price').text
-      
+
       property = Property.new(name: name, address: address, price: price, description: description)
       property.remote_photo_url = photo
       properties << property
       properties.take(10)
-
     end
 
     return properties
@@ -148,7 +147,7 @@ class PropertiesController < ApplicationController
       table_facts: table_facts
     }
   end
-  
+
   def property_params
     params.require(:property).permit(:name, :address, :price, :photo)
   end
