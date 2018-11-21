@@ -3,7 +3,6 @@
   <div class="container">
     <div class="row">
       <% @properties.each do |property| %>
-                    <p>ddddd <%= property.id %></p>
 
         <% next if property.remote_photo_url.include?('noimage') %>
         <% address_parts = property.address.split(',') %>
