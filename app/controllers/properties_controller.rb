@@ -1,13 +1,18 @@
 require 'open-uri'
 require 'nokogiri'
-require 'csv'
 require 'json'
+require 'csv'
 
 class PropertiesController < ApplicationController
   def index
-    @properties = []
-    search_house
-    @properties = Property.where.not(latitude: nil, longitude: nil)
+    @properties = search_house
+
+    # Had to comment this out:
+    # It overwrites the variable holding scraped results and doesn't actually
+    # return anything since the DB doesn't have saved instances of Property yet
+    # search_house uses .new and doesn't .save --> in memory, never saved to DB
+
+    # @properties = Property.where.not(latitude: nil, longitude: nil)
 
     @markers = @properties.map do |property|
       {
@@ -43,23 +48,26 @@ class PropertiesController < ApplicationController
     html_file = open(url).read
     html_doc = Nokogiri::HTML(html_file)
 
-    p "scraped..."
     return html_doc.search('.ranktable tr:nth-child(4)').text.split("Detached").first
-
   end
 
   def search_house
+    properties = []
+
     url = "https://www.zoopla.co.uk/for-sale/property/london/?q=London&results_sort=newest_listings&search_source=home"
     html_file = open(url).read
     html_doc = Nokogiri::HTML(html_file)
+
     html_doc.search('.listing-results-wrapper').each do |element|
-      price = element.search('.listing-results-price').text
       name = element.search('.listing-results-attr a').text
       address = element.search('.listing-results-address').text
       photo = element.search('.photo-hover img').attr('src').value
-      @properties << Property.new(name: name, address: address, photo: photo, price: price, description: description)
-      @properties.take(10)
+      description = element.search('.listing-results-attr + p').text
+      price = element.search('.listing-results-price').text
+      properties << Property.new(name: name, address: address, photo: photo, price: price, description: description)
+      properties.take(10)
     end
-    @properties
+
+    return properties
   end
 end
