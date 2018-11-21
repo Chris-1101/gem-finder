@@ -39,13 +39,9 @@ class PropertiesController < ApplicationController
 
   def scrape_crime(postcode)
     url = "https://www.ukcrimestats.com/Postcode/#{postcode}"
-
     html_file = open(url).read
     html_doc = Nokogiri::HTML(html_file)
-
-    p "scraped..."
     return html_doc.search('.ranktable tr:nth-child(4)').text.split("Detached").first
-
   end
 
   def search_house
