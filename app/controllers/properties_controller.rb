@@ -4,6 +4,19 @@ require 'json'
 require 'csv'
 
 class PropertiesController < ApplicationController
+  def new
+    @property = Property.new
+  end
+
+  def create
+    @property = Property.new(property_params)
+    if @property.save!
+      redirect_to property_path(@property)
+    else
+      render :new
+    end
+  end
+
   def index
     @properties = search_house
 
@@ -46,7 +59,6 @@ class PropertiesController < ApplicationController
 
   def scrape_crime(postcode)
     url = "https://www.ukcrimestats.com/Postcode/#{postcode}"
-
     html_file = open(url).read
     html_doc = Nokogiri::HTML(html_file)
 
@@ -66,8 +78,10 @@ class PropertiesController < ApplicationController
       photo = element.search('.photo-hover img').attr('src').value
       description = element.search('.listing-results-attr + p').text
       price = element.search('.listing-results-price').text
-
-      properties << Property.new(name: name, address: address, photo: photo, price: price, description: description)
+      
+      property = Property.new(name: name, address: address, price: price, description: description)
+      property.remote_photo_url = photo
+      properties << property
       properties.take(10)
 
     end
@@ -133,5 +147,9 @@ class PropertiesController < ApplicationController
       area_average: area_average,
       table_facts: table_facts
     }
+  end
+  
+  def property_params
+    params.require(:property).permit(:name, :address, :price, :photo)
   end
 end

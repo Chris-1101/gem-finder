@@ -1,11 +1,12 @@
 class ConversationsController < ApplicationController
 
-def index
-  @users = User.all
-  @conversations = Conversation.where(sender: current_user).or(Conversation.where(recipient: current_user))
-end
+  def index
+    @users = User.all
+    @conversations = Conversation.where(sender: current_user).or(Conversation.where(recipient: current_user))
+  end
   def show
     @conversation = Conversation.find(params[:id])
+    @messages = @conversation.messages
   end
 def create
   @user = User.find(params[:recipient_id])
@@ -16,7 +17,7 @@ def create
  else
   @conversation = Conversation.create!(conversation_params)
  end
- redirect_to user_conversations_path(@user)
+redirect_to conversation_path(@conversation)
 end
 private
  def conversation_params

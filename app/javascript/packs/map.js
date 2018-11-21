@@ -13,10 +13,9 @@ if (mapElement) { // only build a map if there's a div#map to inject into
   const markers = JSON.parse(mapElement.dataset.markers);
 
   markers.forEach(function(marker) {
-    var el = document.createElement('div');
-    el.className = 'ben-test';
 
-    new mapboxgl.Marker(el)
+
+    new mapboxgl.Marker()
         .setLngLat([marker.lng, marker.lat])
         .addTo(map);
   });
@@ -31,6 +30,15 @@ if (mapElement) { // only build a map if there's a div#map to inject into
     markers.forEach((marker) => {
       bounds.extend([marker.lng, marker.lat]);
     });
-    map.fitBounds(bounds, { duration: 0, padding: 75 })
+    map.fitBounds(bounds, { duration: 500, padding: 75 })
   }
+}
+
+const addressInput = document.getElementById('property_address');
+
+if (addressInput) {
+  const places = require('places.js');
+  const placesAutocomplete = places({
+    container: addressInput
+  });
 }

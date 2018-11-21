@@ -1,22 +1,17 @@
-<div class="message">
-  <img class="avatar-large" src="https://kitt.lewagon.com/placeholder/users/gabriel-dehan">
-  <div class="message-name">
-    <h3>Gab Dehan</h3>
-    <p>10/07/17</p>
+<% @messages.each do |message| %>
+  <div class="message">
+    <%= cl_image_tag message.user.photo if message.user.photo? %>
+    <div class="message-name">
+      <h3><%= message.user.name %></h3>
+      <p><%= message.created_at %></p>
+    </div>
+    <div class="message-body">
+      <p><%= message.body %></p>
+    </div>
   </div>
-  <div class="message-body">
-    <p><strong>I am not sure yet!</strong></p>
-    <p>
-      I am not sure yet! I might be in Shanghai at this moment... Can I tell you later?
-    </p>
-  </div>
-  <div class="message-status">
-    <p class="status pending">Pending</p>
-    <p class="price">€345</p>
-  </div>
-</div>
+<% end %>
 
 <%= simple_form_for [@conversation, Message.new] do |f| %>
-<%= f.input :body %>
-<%= f.submit "Submit you message here" %>
+  <%= f.input :body %>
+  <%= f.submit "Submit you message here" %>
 <% end %>
