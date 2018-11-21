@@ -1,14 +1,42 @@
-<h1>Welcome To Gemfinder!</h1>
-<% @properties.each do |property| %>
-
-<%= property.price %>
-<%= property.address %>
-<%= image_tag property.photo %>
-<% end %>
-
-    <div
-      id="map"
-      style="width: 100%;
-      height: 720px;"
-      data-markers="<%= @markers.to_json %>">
+<div id="properties-index">
+  <hr />
+  <div class="container">
+    <div class="row">
+      <% @properties.each do |property| %>
+        <% next if property.photo.include?('noimage') %>
+        <% address_parts = property.address.split(',') %>
+        <div class="col-xs-12 col-md-6 col-lg-4">
+          <div class="property-card">
+            <div class="property-card-header">
+              <p><%= address_parts[-1] %></p>
+              <h3><%= address_parts[-1].split(' ')[-1] %> district name</h3>
+            </div>
+            <div class="property-card-thumbnail" style="background-image: url(<%= image_path property.photo %>)"></div>
+            <div class="property-card-content">
+              <div>
+                <h3><%= address_parts[0] %></h3>
+                <h6><%= property.price.split(' ')[0] %></h6>
+              </div>
+              <p>
+                <%= property.description %>
+              </p>
+            </div>
+            <div class="property-card-footer">
+              <a>More Info</a>
+              <a>Track</a>
+            </div>
+            <a href="#" class="property-card-link"></a>
+            <a href="" class="property-card-track"></a>
+          </div>
+        </div>
+      <% end %>
     </div>
+  </div>
+</div>
+
+<div
+  id="map"
+  style="width: 100%;
+  height: 720px;"
+  data-markers="<%= @markers.to_json %>">
+</div>
