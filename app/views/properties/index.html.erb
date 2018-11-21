@@ -1,5 +1,10 @@
 <div id="properties-index">
   <hr />
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalproperty">
+Create</button>
+
+  <%= render "user_modals" %>
+
   <div class="container">
     <div class="row">
       <% @properties.each do |property| %>
