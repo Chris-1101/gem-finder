@@ -78,7 +78,9 @@ class PropertiesController < ApplicationController
       photo = element.search('.photo-hover img').attr('src').value
       description = element.search('.listing-results-attr + p').text
       price = element.search('.listing-results-price').text
-      properties << Property.new(name: name, address: address, photo: photo, price: price, description: description)
+      property = Property.new(name: name, address: address, price: price, description: description)
+      property.remote_photo_url = photo
+      properties << property
       properties.take(10)
     end
 
