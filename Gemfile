@@ -16,7 +16,6 @@ gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
-gem 'devise'
 gem 'nokogiri'
 gem 'geocoder'
 gem 'cloudinary'
@@ -36,6 +35,4 @@ group :development, :test do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'dotenv-rails'
 end
-
-gem 'dotenv-rails', groups: [:development, :test]
 
