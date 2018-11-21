@@ -1,0 +1,130 @@
+#properties-index {
+  .container {
+    width: auto;
+    margin: 0 0 20px 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.property-card {
+  // width: 480px;
+  position: relative;
+  background: white;
+  border: 1px solid $colour-dark;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  margin: 20px;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: 'Sackers Gothic', sans-serif;
+    font-size: 24px;
+    letter-spacing: 3px;
+  }
+}
+
+.property-card-header {
+  padding: 25px 30px;
+
+  p {
+    margin-bottom: 5px;
+    font-family: 'Sackers Gothic', sans-serif;
+    font-size: 16px;
+    text-transform: lowercase;
+  }
+}
+
+.property-card-thumbnail {
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+}
+
+.property-card-content {
+  padding: 30px;
+  // min-height: 250px;
+  text-align: justify;
+
+  div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+
+  h6 {
+    margin: 0;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.4em;
+  }
+}
+
+.property-card-footer {
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    display: inline-block;
+    width: 50%;
+    padding: 20px;
+    font-family: 'Sackers Gothic', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    color: $colour-dark;
+
+    &:last-child {
+      background-color: $colour-dark;
+      color: $colour-light;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.property-card-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2;
+  background: $colour-dark;
+  opacity: 0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 0.05;
+  }
+}
+
+.property-card-track {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 65px;
+  z-index: 3;
+  background: transparent;
+}

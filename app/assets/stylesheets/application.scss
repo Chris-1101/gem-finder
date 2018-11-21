@@ -13,3 +13,10 @@
 @import "layouts/index";
 @import "components/index";
 @import "pages/index";
+
+// Global Styles
+body {
+  margin: 30px;
+  background-color: $colour-light;
+  color: $colour-dark;
+}
