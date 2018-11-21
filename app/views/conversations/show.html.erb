@@ -12,6 +12,6 @@
 <% end %>
 
 <%= simple_form_for [@conversation, Message.new] do |f| %>
-  <%= f.input :body %>
+  <%= f.input :body, input_html: { class: @messages.length > 0 ? "" : "body-height-1" } %>
   <%= f.submit "Submit you message here" %>
 <% end %>
