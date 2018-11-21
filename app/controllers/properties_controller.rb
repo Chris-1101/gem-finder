@@ -24,7 +24,7 @@ def search_house
     photo = element.search('.photo-hover img').attr('src').value
     description = element.search('.listing-results-attr + p').text
     price = element.search('.listing-results-price').text
-    @properties << Property.new(name: name, address: address, photo: photo, price: price)
+    @properties << Property.new(name: name, address: address, photo: photo, price: price, description: description)
     @properties.take(10)
   end
   @properties

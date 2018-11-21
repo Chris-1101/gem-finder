@@ -26,12 +26,16 @@
 </div>
 
 <% @properties.each do |property| %>
+  <% address_parts = property.address.split(',') %>
   <hr />
   <div>
-    <p>Name: <%= property.name %></p>
-    <p>Address: <%= property.address %></p>
+    <!-- property.name -->
+    <p><%= address_parts[0] %></p>
+    <p><%= address_parts[-1] %></p>
+    <p>To-do: <%= address_parts[-1].split(' ')[-1] %> district name</p>
     <%= image_tag property.photo %>
-    <p>Price: <%= property.price %></p>
+    <p><%= property.price %></p>
+    <p><%= property.description %></p>
     <!-- property.year
     property.crime_rating -->
   </div>
