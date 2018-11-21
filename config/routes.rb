@@ -9,5 +9,8 @@ Rails.application.routes.draw do
     resources :trackings, only: [:index]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   end
-  resources :trackings, only: [:destroy, :create]
+  resources :conversations, only: [:create, :show, :index, :destroy] do
+    resources :messages, only: [:create, :destroy]
+  end
+resources :trackings, only: [:destroy, :create]
 end
