@@ -10,11 +10,13 @@ class TrackingsController < ApplicationController
   end
 
   def create
-    @tracking = Tracking.create(tracking_params)
-    @user = current_user
-    redirect_to user_path(@user)
+    tracking = Tracking.new(tracking_params)
+    if tracking.save
+      redirect_to user_path(@user)
+    end
   end
 
+  private
   def tracking_params
     params.require(:tracking).permit(:user_id, :property_id)
   end
