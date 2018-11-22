@@ -10,6 +10,12 @@
 
   }
 }
+
+.convo-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+}
 .message:last-child {
   border-bottom: none;
 }
@@ -29,18 +35,69 @@
   margin-top: 5px;
 }
 .message-body {
-  padding-left: 10px;
-  font-size: 13px;
-  color: rgba(0,0,0,0.7);
+  text-align: center;
 }
-.message-body {
-  padding-left: 20px;
-  color: rgba(0,0,0,0.4);
+
+
+.all-of-it {
+  display: flex;
 }
-.message-body strong{
-  color: rgba(0,0,0,0.9);
-  color: rgba(0,0,0,0.9);
+
+.convo-select {
+  width: 150px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  p {
+    margin-bottom: 0;
+  }
+
+
+  img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
 }
+.message-display {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 40px;
+  position: relative;
+
+
+}
+
+.message-sender {
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: blue;
+  border-radius: 10px;
+  height: auto;
+  text-align: center;
+  width: fit-content;
+  margin-bottom: 10px;
+  // position: absolute;
+}
+
+.message-recipient {
+ color: black;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: grey;
+  border-radius: 10px;
+  height: auto;
+  text-align: center;
+  width: fit-content;
+  margin-bottom: 10px;
+  align-self: flex-end;
+
+}
+
 .message-body p {
   margin: 6px 0;
 }

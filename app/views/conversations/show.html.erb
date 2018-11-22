@@ -1,10 +1,6 @@
 <% @messages.each do |message| %>
   <div class="message">
-    <%= cl_image_tag message.user.photo if message.user.photo? %>
-    <div class="message-name">
-      <h3><%= message.user.name %></h3>
-      <p><%= message.created_at %></p>
-    </div>
+    <%# cl_image_tag message.user.photo if message.user.photo? %>
     <div class="message-body">
       <p><%= message.body %></p>
     </div>

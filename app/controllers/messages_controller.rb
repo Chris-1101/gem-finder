@@ -26,7 +26,7 @@ def create
  @message = @conversation.messages.new(message_params)
  @message.user = current_user
  if @message.save
-  redirect_to conversation_path(@conversation)
+  redirect_to conversations_path({ selected_convo: @conversation.id })
  end
 end
 private
