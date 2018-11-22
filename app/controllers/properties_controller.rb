@@ -59,7 +59,6 @@ class PropertiesController < ApplicationController
     @postcodes.each { |postcode| @crime_rates << scrape_crime(postcode).gsub(/All Crime & ASB/, '') }
     @property_details = zoopla_details(postcodes.sample)
     @hometrack_details = hometrack_details
-
   end
 
   private

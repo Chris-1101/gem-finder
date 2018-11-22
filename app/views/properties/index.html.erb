@@ -26,6 +26,7 @@ Create</button>
               </p>
             </div>
             <div class="property-card-footer">
+
               <%= link_to "More Info", "#"  %>
               <%= link_to "Track", trackings_path(tracking: {user_id: current_user, property_id: property.id }), method: :post  %>
             </div>
