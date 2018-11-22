@@ -54,11 +54,12 @@ class PropertiesController < ApplicationController
               'BT119BS','BT118LU','BT118QU','BT274HF','BT440JB','AB101AF','AB510AG','N101AG','N31AJ','SA20AH']
 
     @property = Property.find(params[:id])
-    @crime_rates = []
-    @postcodes = postcodes.sample(10)
-    @postcodes.each { |postcode| @crime_rates << scrape_crime(postcode).gsub(/All Crime & ASB/, '') }
-    @property_details = zoopla_details(postcodes.sample)
-    @hometrack_details = hometrack_details
+
+    # @crime_rates = []
+    # @postcodes = postcodes.sample(10)
+    # @postcodes.each { |postcode| @crime_rates << scrape_crime(postcode).gsub(/All Crime & ASB/, '') }
+    # @property_details = zoopla_details(postcodes.sample)
+    # @hometrack_details = hometrack_details
   end
 
   private
