@@ -8,8 +8,7 @@ Create</button>
   <div class="container">
     <div class="row">
       <% @properties.each do |property| %>
-
-        <% next if property.remote_photo_url.include?('noimage') %>
+        <% next if property.price.nil? %>
         <% address_parts = property.address.split(',') %>
         <div class="col-xs-12 col-md-6 col-lg-4">
           <div class="property-card">
@@ -17,7 +16,7 @@ Create</button>
               <p><%= address_parts[-1] %></p>
               <h3><%= address_parts[-1].split(' ')[-1] %> district name</h3>
             </div>
-            <div class="property-card-thumbnail" style="background-image: url(<%= property.remote_photo_url %>)"></div>
+            <div class="property-card-thumbnail" style="background-image: url(<%= cl_image_path property.photo %>)"></div>
             <div class="property-card-content">
               <div>
                 <h3><%= address_parts[0] %></h3>

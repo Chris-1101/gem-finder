@@ -19,7 +19,10 @@ class PropertiesController < ApplicationController
 
   def index
     @property = Property.new
-    @properties = search_house
+    # @properties = search_house
+    @properties = Property.all
+    # search_house
+    # @properties = Property.all
 
     # Had to comment this out:
     # It overwrites the variable holding scraped results and doesn't actually
@@ -54,6 +57,8 @@ class PropertiesController < ApplicationController
     @crime_rates = []
     @postcodes = postcodes.sample(10)
     @postcodes.each { |postcode| @crime_rates << scrape_crime(postcode).gsub(/All Crime & ASB/, '') }
+    @property_details = zoopla_details(postcodes.sample)
+    @hometrack_details = hometrack_details
   end
 
   private
@@ -67,6 +72,7 @@ class PropertiesController < ApplicationController
   end
 
   def search_house
+    # ScrapePropertiesJob.perform_later(current_user.id)
     properties = []
 
     url = "https://www.zoopla.co.uk/for-sale/property/london/?q=London&results_sort=newest_listings&search_source=home"
