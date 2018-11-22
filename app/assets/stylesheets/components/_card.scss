@@ -128,3 +128,17 @@
   z-index: 3;
   background: transparent;
 }
+
+.showcard {
+  height: 300px;
+  width: 500px;
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 20px;
+  border-radius:3px;
+  border: 1px solid;
+  box-shadow: 0.4px 0.4px;
+  position: relative;
+}

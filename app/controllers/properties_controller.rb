@@ -18,6 +18,7 @@ class PropertiesController < ApplicationController
   end
 
   def index
+    @property = Property.new
     @properties = search_house
     # search_house
     # @properties = Property.all
@@ -81,6 +82,7 @@ class PropertiesController < ApplicationController
       photo = element.search('.photo-hover img').attr('src').value
       description = element.search('.listing-results-attr + p').text
       price = element.search('.listing-results-price').text
+
       property = Property.new(name: name, address: address, price: price, description: description)
       property.remote_photo_url = photo
       properties << property
@@ -88,6 +90,66 @@ class PropertiesController < ApplicationController
     end
 
     return properties
+  end
+
+  def hometrack_details
+    url = "https://www.hometrack.com/uk/insight/uk-cities-house-price-index/"
+
+    html_file = open(url).read
+    html_doc = Nokogiri::HTML(html_file)
+
+    cities = html_doc.search('tr[data-bind="click:selectCity"] td:nth-child(1)').to_a.join(" ").split(" ")
+    average_price = html_doc.search('tr[data-bind="click:selectCity"] td:nth-child(2)').text.split("£")
+    twelve_months = html_doc.search('tr[data-bind="click:selectCity"] td:nth-child(5)').text.strip.split("%")
+    last_month = html_doc.search('tr[data-bind="click:selectCity"] td:nth-child(7)').text.strip.split("%")
+
+    average_price -= [""]
+
+    return {
+      cities: cities,
+      average_price: average_price,
+      twelve_months: twelve_months,
+      last_month: last_month
+    }
+  end
+
+  def zoopla_details(postcode)
+    url = "https://www.zoopla.co.uk/market/#{postcode}/"
+
+    html_file = open(url).read
+    html_doc = Nokogiri::HTML(html_file)
+
+    # This is the property type and the first column in the table
+    property_type = html_doc.search('.stripe.property-table td:nth-child(1)').to_a.join(" ").to_s.delete("\n")
+    property_type = property_type.split(" ")[0..3]
+
+    # This is the second column of the first table (Average current value)
+    avg_current = html_doc.search('.stripe.property-table').first
+    avg_current_first_column = avg_current.search('td:nth-child(2)').text.split("£")
+
+    avg_price_foot = avg_current.search('td:nth-child(3)').text.split("£")
+
+    avg_paid = avg_current.search('td:nth-child(5)').text.split("£")
+
+    avg_current_first_column -= [""]
+    avg_price_foot -= [""]
+    avg_paid -= [""]
+
+    # This is the average price for an area postcode
+    area_average = html_doc.search('.price').text.strip.split("£")[1]
+
+    # This is the fun facts for each postcode, highest valued streets
+    table_facts = html_doc.search('.split2l tbody').text.delete("\n").split("  ")
+    table_facts = table_facts.reject { |e| e.empty? }
+
+    return {
+      property_type: property_type,
+      avg_current_first_column: avg_current_first_column,
+      avg_price_foot: avg_price_foot,
+      avg_paid: avg_paid,
+      area_average: area_average,
+      table_facts: table_facts
+    }
   end
 
   def property_params
