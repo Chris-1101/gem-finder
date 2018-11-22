@@ -8,6 +8,7 @@ Create</button>
   <div class="container">
     <div class="row">
       <% @properties.each do |property| %>
+        <% next if property.price.nil? %>
         <% address_parts = property.address.split(',') %>
         <div class="col-xs-12 col-md-6 col-lg-4">
           <div class="property-card">
