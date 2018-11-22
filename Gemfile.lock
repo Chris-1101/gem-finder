@@ -59,6 +59,8 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    chart-js-rails (0.1.6)
+      railties (> 3.1)
     cloudinary (1.10.0)
       aws_cf_signer
       json (~> 1.8)
@@ -230,6 +232,7 @@ DEPENDENCIES
   bootsnap
   bootstrap-sass (~> 3.3)
   carrierwave (~> 1.2)
+  chart-js-rails
   cloudinary
   devise
   dotenv-rails
