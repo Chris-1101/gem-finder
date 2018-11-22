@@ -1,17 +1,13 @@
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'Crime Rates for this area')">Crime Rates</button>
-  <button class="tablinks" onclick="openCity(event, 'Average percentage change')">Market Statistics</button>
-</div>
-
-<div id="Crime Rates" class="tabcontent">
-  <h3></h3>
-  <p>.</p>
-</div>
-
 <h1>This is the property</h1>
-<p>Find the listing below and further information</p>
+<p><strong>Find the listing below and further information</strong></p>
 
 <div class="container">
+  <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Crime Rates')">Crime Rates</button>
+  <button class="tablinks" onclick="openCity(event, 'Market Statistics')">Market Statistics</button>
+  <button class="tablinks" onclick="openCity(event, 'Average Price')">Average Price</button>
+</div>
+
   <div class="row">
     <div class="col-xs-12 col-sm-6">
         <%= @property.name  %>
@@ -22,20 +18,26 @@
         <div class="showcard" style="background-image: url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cdc84c9290e90088f8ab78270ee1ffdf&auto=format&fit=crop&w=500&q=60');">
       <% end %>
     </div>
-      <h5 id="myChart">Crime Rate: <%= @crime_rates.first %></h5>
+    <div id="Crime Rates" class="container tabcontent">
+      <h3 id="myChart">Crime Rate: <%= @crime_rates.first %></h3>
+    </div>
       <br>
       <br>
-      <h5>Average Current Price: <%= @property_details[:avg_current_first_column].first %></h5>
-      <h5>Average Price per sq foot: <%= @property_details[:avg_price_foot].first %></h5>
+      <div id="Average Price" class="container tabcontent">
+      <h3>Average Current Price: <%= @property_details[:avg_current_first_column].first %></h3>
+      <h3>Average Price per sq foot: <%= @property_details[:avg_price_foot].first %></h3>
+    </div>
 
 
       <br>
       <br>
-      <h5>City: <%= @hometrack_details[:cities].first %></h5>
-      <h5>Average Price: <%= @hometrack_details[:average_price].first %></h5>
-      <h5>Last 12 months: <%= @hometrack_details[:twelve_months].first %></h5>
-      <h5>Price action in the last month: <%= @hometrack_details[:last_month].first %></h5>
+      <div id="Market Statistics" class="container tabcontent">
+      <h3>City: <%= @hometrack_details[:cities].first %></h3>
+      <h3>Average Price: <%= @hometrack_details[:average_price].first %></h3>
+      <h3>Last 12 months: <%= @hometrack_details[:twelve_months].first %></h3>
+      <h3>Price action in the last month: <%= @hometrack_details[:last_month].first %></h3>
       <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
@@ -77,4 +79,29 @@ var myChart = new Chart(ctx, {
 </script>
   </div>
 </div>
+
+<script>
+function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+
+
 
