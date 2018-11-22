@@ -19,23 +19,23 @@
       <% end %>
     </div>
     <div id="Crime Rates" class="container tabcontent">
-      <h3 id="myChart">Crime Rate: <%= @crime_rates.first %></h3>
+      <h5 id="myChart">Crime Rate: <%= @crime_rates.first %></h5>
     </div>
       <br>
       <br>
       <div id="Average Price" class="container tabcontent">
-      <h3>Average Current Price: <%= @property_details[:avg_current_first_column].first %></h3>
-      <h3>Average Price per sq foot: <%= @property_details[:avg_price_foot].first %></h3>
+      <h5>Average Current Price: <%= @property_details[:avg_current_first_column].first %></h5>
+      <h5>Average Price per sq foot: <%= @property_details[:avg_price_foot].first %></h5>
     </div>
 
 
       <br>
       <br>
       <div id="Market Statistics" class="container tabcontent">
-      <h3>City: <%= @hometrack_details[:cities].first %></h3>
-      <h3>Average Price: <%= @hometrack_details[:average_price].first %></h3>
-      <h3>Last 12 months: <%= @hometrack_details[:twelve_months].first %></h3>
-      <h3>Price action in the last month: <%= @hometrack_details[:last_month].first %></h3>
+      <h5>City: <%= @hometrack_details[:cities].first %></h5>
+      <h5>Average Price: <%= @hometrack_details[:average_price].first %></h5>
+      <h5>Last 12 months: <%= @hometrack_details[:twelve_months].first %></h5>
+      <h5>Price action in the last month: <%= @hometrack_details[:last_month].first %></h5>
       <canvas id="myChart" width="400" height="400"></canvas>
     </div>
 <script>
