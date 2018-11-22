@@ -12,14 +12,54 @@
         <% if @property.photo? %>
         <div class="showcard" style="background-image: url('<%= cl_image_path @property.photo, height: 300, width: 400 %>');background-size: cover;">
         </div>
-         <div >
-        <h5><%= @property.address  %></h5>
-        <h5><strong><%= @property.price  %></strong></h5>
-        <%= link_to "Track Property", trackings_path(tracking: {property_id: @property,user_id: current_user}), method: :post, class: "btn btn-danger" %>
-      </div>
+        <div >
+          <h5><%= @property.address  %></h5>
+          <h5><strong><%= @property.price  %></strong></h5>
+          <%= link_to "Track Property", trackings_path(tracking: {property_id: @property,user_id: current_user}), method: :post, class: "btn btn-danger" %>
+        </div>
         <% else %>
         <div class="showcard" style="background-image: url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cdc84c9290e90088f8ab78270ee1ffdf&auto=format&fit=crop&w=500&q=60');">
           <% end %>
+        </div>
+        <div class='container'>
+          <div class="radial-progress" data-score="3">
+            <div class="circle">
+              <div class="mask full">
+                <div class="fill"></div>
+              </div>
+              <div class="mask half">
+                <div class="fill"></div>
+                <div class="fill fix"></div>
+              </div>
+            </div>
+            <div class="inset"><span class='big'>3</span> <span class='little'>/ 5 Crime</span></div>
+          </div>
+
+          <div class="radial-progress" data-score="1">
+            <div class="circle">
+              <div class="mask full">
+                <div class="fill"></div>
+              </div>
+              <div class="mask half">
+                <div class="fill"></div>
+                <div class="fill fix"></div>
+              </div>
+            </div>
+            <div class="inset"><span class='big'>1</span> <span class='little'>/ 5 Price</span></div>
+          </div>
+
+          <div class="radial-progress" data-score="4">
+            <div class="circle">
+              <div class="mask full">
+                <div class="fill"></div>
+              </div>
+              <div class="mask half">
+                <div class="fill"></div>
+                <div class="fill fix"></div>
+              </div>
+            </div>
+            <div class="inset"><span class='big'>4</span> <span class='little'>/ 5 Overall</span></div>
+          </div>
         </div>
 
       </div>
@@ -59,30 +99,22 @@
 
 <script>
   function openCity(evt, cityName) {
-    // Declare all variables
     var i, tabcontent, tablinks;
-
-    // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
       tabcontent[i].style.display = "none";
     }
-
-    // Get all elements with class="tablinks" and remove the class "active"
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-
-    // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
   }
 </script>
-
-
 <%= content_for(:after_js) do %>
 <%= javascript_pack_tag 'chart' %>
+<%= javascript_pack_tag 'ratings' %>
 <% end %>
 
 
