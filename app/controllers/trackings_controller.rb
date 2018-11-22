@@ -11,6 +11,7 @@ class TrackingsController < ApplicationController
 
   def create
     tracking = Tracking.new(tracking_params)
+    @user = current_user
     if tracking.save
       redirect_to user_path(@user)
     end
