@@ -19,7 +19,8 @@ class PropertiesController < ApplicationController
 
   def index
     @property = Property.new
-    @properties = search_house
+    # @properties = search_house
+    @properties = Property.all
     # search_house
     # @properties = Property.all
 
