@@ -1,2 +1,11 @@
-<h1>User#show</h1>
-<p>Find me in app/views/user/show.html.erb</p>
+<h1>Welcome to your DashBoard</h1>
+<% @trackings.each do |tracking| %>
+  <%= tracking.property.name %>
+  <%= tracking.property.location %>
+  <%= tracking.property.address %>
+  <%= tracking.property.price %>
+  <%= tracking.property.crime_rating %>
+  <%= tracking.property.description %>
+  <%= tracking.property.year %>
+  <%= cl_image_tag tracking.property.photo %>
+<% end %>

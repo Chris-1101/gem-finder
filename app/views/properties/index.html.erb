@@ -14,7 +14,7 @@ Create</button>
           <div class="property-card">
             <div class="property-card-header">
               <p><%= address_parts[-1] %></p>
-              <h3><%= address_parts[-1].split(' ')[-1] %> district name</h3>
+              <h3><%= property.postcode %> district name</h3>
             </div>
             <div class="property-card-thumbnail" style="background-image: url(<%= cl_image_path property.photo %>)"></div>
             <div class="property-card-content">
