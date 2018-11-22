@@ -14,7 +14,7 @@
       <%= cl_image_tag recipient.photo if recipient.photo? %>
       <div>
         <p class="convo-name"><%= recipient.name %></p>
-        <p><%= conversation.messages.last.created_at.strftime('%I:%M%P') %></p>
+        <p><%= conversation.messages&.last&.created_at&.strftime('%I:%M%P') %></p>
       </div>
     </div>
     <% end %>

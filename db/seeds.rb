@@ -22,6 +22,18 @@ end
 puts "Cleaning database.."
 Property.destroy_all
 
+User.destroy_all
+puts "Creating Users.."
+
+users_attributes
+User.create!(email: jessica@lewagon.com, password: "1234567"),
+User.create!(email: phelim@lewagon.com, password: "1234567"),
+User.create!(email: alex@lewagon.com, password: "1234567"),
+User.create!(email: donald@lewagon.com, password: "1234567"),
+User.create!(email: mcgregor@lewagon.com, password: "1234567"),
+User.create!(email: musk@lewagon.com, password: "1234567"),
+User.create!(email: amine@lewagon.com, password: "1234567")
+
 # puts "Creating Static Properties"
 # properties_attributes = [
 #   {

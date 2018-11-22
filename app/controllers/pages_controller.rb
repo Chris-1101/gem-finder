@@ -14,6 +14,8 @@ class PagesController < ApplicationController
   end
 
 
+
+
 end
 
 require 'nokogiri'
