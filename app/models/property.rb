@@ -1,4 +1,5 @@
 class Property < ApplicationRecord
+  belongs_to :postcode
   has_many :trackings
 
   # Cloudinary
