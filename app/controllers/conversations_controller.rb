@@ -3,6 +3,11 @@ class ConversationsController < ApplicationController
   def index
     @users = User.all
     @conversations = Conversation.where(sender: current_user).or(Conversation.where(recipient: current_user))
+    if params[:selected_convo]
+      @selected_convo = Conversation.find(params[:selected_convo])
+    else
+     @selected_convo = @conversations.last
+    end
   end
   def show
     @conversation = Conversation.find(params[:id])
@@ -12,12 +17,12 @@ def create
   @user = User.find(params[:recipient_id])
  if Conversation.between(params[:sender_id],params[:recipient_id])
    .present?
-    @conversation = Conversation.between(params[:sender_id],
+    conversation = Conversation.between(params[:sender_id],
      params[:recipient_id]).first
  else
-  @conversation = Conversation.create!(conversation_params)
+   conversation = Conversation.create!(conversation_params)
  end
-redirect_to conversation_path(@conversation)
+  redirect_to conversation_path(conversation)
 end
 private
  def conversation_params
