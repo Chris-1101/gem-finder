@@ -84,7 +84,6 @@ class PropertiesController < ApplicationController
       property.remote_photo_url = photo
       properties << property
       properties.take(10)
-
     end
 
     return properties
