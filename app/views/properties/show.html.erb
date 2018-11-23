@@ -3,7 +3,7 @@
     <button class="tablinks" onclick="openCity(event, 'Property Info')">Property Info</button>
     <button class="tablinks" onclick="openCity(event, 'Average Value')">Average Value</button>
     <button class="tablinks" onclick="openCity(event, 'Crime Rates')">Crime Rates</button>
-    <button class="tablinks" onclick="openCity(event, 'Market Statistics')">Market Statistics</button>
+    <button class="tablinks" onclick="openCity(event, 'Average Price Paid')">Average Price Paid</button>
   </div>
 
   <div class="row">
@@ -81,10 +81,11 @@
 
       <br>
       <br>
-      <div id="Market Statistics" class="container tabcontent">
+      <div id="Average Price Paid" class="container tabcontent">
         <div class="chart-container" height:40vh; width:80vw">
-          <canvas id="pie-chart" width="800" height="450"></canvas>
+          <canvas id="lineGraph" data-avg-paid ="<%= @property.postcode.avg_paid.first.gsub(/[\[\"\]]/, '') %>"</canvas>
         </div>
+
      <!--  <h3>City: <%#= @hometrack_details[:cities].first %></h3>
       <h3>Average Price: <%#= @hometrack_details[:average_price].first %></h3>
       <h3>Last 12 months: <%#= @hometrack_details[:twelve_months].first %></h3>
