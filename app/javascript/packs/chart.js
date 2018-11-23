@@ -5,17 +5,17 @@ const crimeRate = document.getElementById("myChart").dataset.crimeRate
 const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Crime Rate", " ", " ", " "],
+        labels: ["Crime Rating in this postcode", "UK Average Crime Rating"],
         datasets: [{
             label: 'Crime rating',
-            data: [crimeRate],
+            data: [crimeRate, 57.8],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
+                'rgba(0, 128, 128, 0.2)',
+                'rgba(128, 0, 0, 0.2)',
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)'
+                'rgba(0, 128, 128, 0.2)',
+                'rgba(128, 0, 0, 0.2)'
             ],
             borderWidth: 1
         }]
@@ -31,61 +31,63 @@ const myChart = new Chart(ctx, {
     }
 });
 
-new Chart(document.getElementById("line-chart"), {
-  type: 'line',
-  data: {
-    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-    datasets: [{
-        data: [86,114,106,106,107,111,133,221,783,2478],
-        label: "Africa",
-        borderColor: "#3e95cd",
-        fill: false
-      }, {
-        data: [282,350,411,502,635,809,947,1402,3700,5267],
-        label: "Asia",
-        borderColor: "#8e5ea2",
-        fill: false
-      }, {
-        data: [168,170,178,190,203,276,408,547,675,734],
-        label: "Europe",
-        borderColor: "#3cba9f",
-        fill: false
-      }, {
-        data: [40,20,10,16,24,38,74,167,508,784],
-        label: "Latin America",
-        borderColor: "#e8c3b9",
-        fill: false
-      }, {
-        data: [6,3,2,2,7,26,82,172,312,433],
-        label: "North America",
-        borderColor: "#c45850",
-        fill: false
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'World population per region (in millions)'
+const ctx2 = document.getElementById("myBarChart").getContext('2d');
+const avgDataset = document.getElementById("myBarChart").dataset.avgCurrentFirst.split(',')
+const myBarChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ["Detached", "Semi-Detached", "Terraced", "Flats"],
+        datasets: [{
+            label: 'Average current value of properties',
+            data: [avgDataset[0] * 1000 , avgDataset[2] * 1000, avgDataset[3] * 1000, avgDataset[1] * 1000],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 255, 0, 0.2)',
+                'rgba(0, 255,0, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    callback: (value) => {
+                      return '£' + value
+                    }
+                },
+            }]
+        }
     }
-  }
 });
 
-new Chart(document.getElementById("pie-chart"), {
-    type: 'pie',
+
+new Chart(document.getElementById("lineGraph"), {
+    type: 'line',
     data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      labels: ["Detached", "Semi-Detached", "Terraced", "Flats"],
       datasets: [{
-        label: "Population (millions)",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [2478,5267,734,784,433]
+        label: "Average Price Paid over 12 months",
+        backgroundColor: ["transparent"],
+        borderColor: 'rgba(0,0,0)',
+        data: [avgDataset[0] * 1000 , avgDataset[2] * 1000, avgDataset[3] * 1000, avgDataset[1] * 1000]
       }]
     },
     options: {
       title: {
         display: true,
-        text: 'Predicted world population (millions) in 2050'
+        text: 'Average Price Paid'
       }
     }
 });
+
+
+
 

@@ -1,11 +1,25 @@
-<h1>Welcome to your DashBoard</h1>
+<div class=container></div>
+<div class=headingdashboard>
+<h1><strong>Welcome to your DashBoard</strong></h1>
 <% @trackings.each do |tracking| %>
-  <%= tracking.property.name %>
-  <%= tracking.property.location %>
-  <%= tracking.property.address %>
-  <%= tracking.property.price %>
-  <%= tracking.property.crime_rating %>
-  <%= tracking.property.description %>
-  <%= tracking.property.year %>
-  <%= cl_image_tag tracking.property.photo %>
+<div class="col-xs-12 col-sm-6">
+<div class="property-card">
+            <div class="property-card-header">
+              <p><%= tracking.property.name %></p>
+              <h3><%= tracking.property.location %></h3>
+            </div>
+            <div class="property-card-thumbnail" style="background-image: url(<%= cl_image_path tracking.property.photo %>)"></div>
+            <div class="property-card-content">
+              <div>
+                <h3><%= tracking.property.address %></h3>
+                <h6><%= tracking.property.price %></h6>
+                <h6><%= tracking.property.crime_rating %></h6>
+              </div>
+                <p> <%= tracking.property.description %></p>
+                <p>  <%= tracking.property.year %></p>
+              </div>
+
+        </div>
+  </div>
 <% end %>
+</div>
