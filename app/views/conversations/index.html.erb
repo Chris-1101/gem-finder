@@ -14,7 +14,7 @@
       <%= cl_image_tag recipient.photo if recipient.photo? %>
       <div>
         <p class="convo-name"><%= recipient.name %></p>
-        <p><%= conversation.messages.last.created_at.strftime('%I:%M%P') %></p>
+        <p><%= conversation&.messages&.last&.created_at&.strftime('%I:%M%P') %></p>
       </div>
     </div>
     <% end %>
@@ -23,12 +23,10 @@
   <div class="ui segment">
    <h3 class="btn btn-danger btn-lg">All Users</h3>
     <div class="ui list">
-     <% @users.each do |user| %>
-      <% if user.id != current_user.id %>
+     <% @similar_users.each do |user| %>
        <div class="item">
       <%= user.email %> <%= link_to "Message me!", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post" %>
    </div>
-    <% end %>
    <% end %>
    </div>
   </div>
