@@ -1,53 +1,47 @@
 <div id="properties-index">
-  <hr />
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalproperty">
-Create</button>
+  <div class="properties-wrapper">
+    <div class="container">
+      <div class="row">
+        <% @properties.sample(30).each do |property| %>
+          <% next if property.price.nil? %>
+          <% next if property.photo_url.include?('noimage') %>
 
-  <%= render "user_modals" %>
+          <% # All this should probably happen somewhere else %>
+          <% address_parts = property.address.split(',') %>
+          <% url = "http://api.postcodes.io/outcodes/#{property.postcode.outcode}" %>
+          <% response = JSON.parse(open(url).read) %>
+          <% area = response["result"]["admin_ward"][0] %>
 
-  <div class="container">
-    <div class="row">
-      <% @properties.each do |property| %>
-        <% next if property.price.nil? %>
-
-        <% # All this should probably happen somewhere else %>
-        <% address_parts = property.address.split(',') %>
-        <% url = "http://api.postcodes.io/outcodes/#{property.postcode.outcode}" %>
-        <% response = JSON.parse(open(url).read) %>
-        <% area = response["result"]["admin_ward"][0] %>
-
-        <div class="col-xs-12 col-md-6 col-lg-4">
-          <div class="property-card">
-            <div class="property-card-header">
-              <p><%= address_parts[-1] %></p>
-              <h3><%= area %></h3>
-            </div>
-            <div class="property-card-thumbnail" style="background-image: url(<%= cl_image_path property.photo %>)"></div>
-            <div class="property-card-content">
-              <div>
-                <h3><%= address_parts[0] %></h3>
-                <h6><%= property.price.split(' ')[0] %></h6>
+          <div class="col-xs-12 col-md-6 col-lg-6">
+            <div class="property-card">
+              <div class="property-card-header">
+                <p><%= address_parts[-1] %></p>
+                <h3><%= area %></h3>
               </div>
-              <p>
-                <%= property.description %>
-              </p>
+              <div class="property-card-thumbnail" style="background-image: url(<%= cl_image_path property.photo %>)"></div>
+              <div class="property-card-content">
+                <div>
+                  <h3><%= address_parts[0] %></h3>
+                  <h6><%= property.price.split(' ')[0] %></h6>
+                </div>
+                <p>
+                  <% content_max_len = 170 %>
+                  <% description = property.description.first(content_max_len) %>
+                  <% description += " [...]" if property.description.length > content_max_len %>
+                  <%= description %>
+                </p>
+              </div>
+              <div class="property-card-footer">
+                <a>More Info</a>
+                <a>Track</a>
+              </div>
+              <%= link_to "", property_path(property), class: "property-card-link" %>
+              <%= link_to "", trackings_path(tracking: {user_id: current_user.id, property_id: property.id }), method: :post, class: "property-card-track"  %>
             </div>
-            <div class="property-card-footer">
-              <a>More Info</a>
-              <%= link_to "Track", trackings_path(tracking: {user_id: current_user.id, property_id: property.id }), method: :post  %>
-            </div>
-            <!-- <a href="#" class="property-card-link"></a>
-            <a href="" class="property-card-track"></a> -->
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
+    <div id="map" data-markers="<%= @markers.to_json %>"></div>
   </div>
-</div>
-
-<div
-  id="map"
-  style="width: 100%;
-  height: 720px;"
-  data-markers="<%= @markers.to_json %>">
 </div>

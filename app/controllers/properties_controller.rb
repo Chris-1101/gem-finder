@@ -20,10 +20,9 @@ class PropertiesController < ApplicationController
   def index
     @property = Property.new
     # @properties = search_house
-    @properties = Property.all
-
-    # search_house
     # @properties = Property.all
+    # search_house
+    @properties = Property.all
 
     # Had to comment this out:
     # It overwrites the variable holding scraped results and doesn't actually

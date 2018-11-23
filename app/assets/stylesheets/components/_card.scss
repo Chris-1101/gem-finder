@@ -1,6 +1,19 @@
 #properties-index {
+  margin: 20px 30px;
+
+  #map {
+    position: sticky;
+    top: 150px;
+    width: 50%;
+    height: calc(100vh - 180px);
+    margin-left: 30px;
+    margin-top: 20px;
+    border: 1px solid $colour-dark;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  }
+
   .container {
-    width: auto;
+    // width: auto;
     margin: 0 0 20px 0;
     padding-left: 0;
     padding-right: 0;
@@ -15,7 +28,12 @@
   .row > [class*='col-'] {
     display: flex;
     flex-direction: column;
+    padding: 0px;
   }
+}
+
+.properties-wrapper {
+  display: flex;
 }
 
 .property-card {
@@ -31,7 +49,7 @@
     margin-bottom: 0;
     font-family: 'Sackers Gothic', sans-serif;
     font-size: 24px;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
   }
 }
 
@@ -54,22 +72,23 @@
 
 .property-card-content {
   padding: 30px;
-  // min-height: 250px;
+  height: 180px;
+  overflow: hidden;
   text-align: justify;
 
   div:first-child {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-  }
 
-  h3 {
-    margin-bottom: 20px;
-    font-size: 24px;
-  }
+    h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
 
-  h6 {
-    margin: 0;
+    h6 {
+      margin: 0;
+    }
   }
 
   p {
