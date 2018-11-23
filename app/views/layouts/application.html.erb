@@ -13,6 +13,8 @@
   <body>
     <%= render 'shared/flashes' %>
     <%= render 'shared/navbar' %>
+    <%= render 'shared/user_modals' if params["controller"] == "properties" && params["action"] == "index" %>
+
     <%= yield %>
 
     <%= render 'layouts/footer' %>
