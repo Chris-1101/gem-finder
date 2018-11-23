@@ -1,55 +1,63 @@
 <div class="ui segment">
- <h3 class="friends">People Who Tracked Similar Properties..</h3>
- <div class="all-of-it">
-   <div class="ui list">
-    <div class="item">
-     <% @conversations.each do |conversation| %>
-     <% if conversation.sender_id == current_user.id %>
-     <% recipient = User.find(conversation.recipient_id) %>
-     <% else %>
-     <% recipient = User.find(conversation.sender_id) %>
-     <% end %>
-     <%= link_to conversations_path({ selected_convo: conversation.id }) do%>
-     <div class="convo-select">
-      <%= cl_image_tag recipient.photo if recipient.photo? %>
-      <div>
-        <p class="convo-name"><%= recipient.name %></p>
-        <p><%= conversation&.messages&.last&.created_at&.strftime('%I:%M%P') %></p>
+  <h3 class="friends">People Who Tracked Similar Properties..</h3>
+  <div class="ui list" style="margin-top: 50px;">
+  <table>
+    <div class="ui list">
+      <% @similar_users.each do |user| %>
+        <div class="item">
+          <%= user.email %> <%= link_to "Message me!", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post" %>
+        </div>
+      <% end %>
+    </div>
+  </table>
+  <div class="all-of-it">
+    <div class="ui list">
+      <div class="item">
+        <% @conversations.each do |conversation| %>
+          <% if conversation.sender_id == current_user.id %>
+            <% recipient = User.find(conversation.recipient_id) %>
+          <% else %>
+            <% recipient = User.find(conversation.sender_id) %>
+          <% end %>
+          <%= link_to conversations_path({ selected_convo: conversation.id }) do%>
+            <div class="convo-select">
+              <%= cl_image_tag recipient.photo if recipient.photo? %>
+              <div>
+                <p class="convo-name"><%= recipient.name %></p>
+                <p><%= conversation&.messages&.last&.created_at&.strftime('%I:%M%P') %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="ui segment">
+        <h3 class="users-all">All Users</h3>
+        <div class="ui list" style="margin-top: 50px;">
+          <table>
+            <% User.all.each do |user| %>
+              <tr style="margin-bottom: 10px;">
+                <td class="item gap"><%= user.name %></td>
+                <td class="gap">
+                  <%= link_to "Message me!", conversations_path(sender_id: current_user.id, recipient_id: user.id), class: "message-me btn", method: "post" %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
       </div>
     </div>
-    <% end %>
-    <% end %>
-  </div>
-  <div class="ui segment">
-   <h3 class="users-all">All Users</h3>
-    <div class="ui list" style="margin-top: 50px;">
-    <table>
-      <% User.all.each do |user| %>
-        <tr style="margin-bottom: 10px;">
-          <td class="item gap"><%= user.name %></td>
-          <td class="gap">
-            <%= link_to "Message me!", conversations_path(sender_id: current_user.id, recipient_id: user.id), class: "message-me btn", method: "post" %>
-          </td>
-        </tr>
+    <div class="message-display">
+      <%if @selected_convo %>
+        <%  @selected_convo.messages.each do |message| %>
+        <div class="message-<%= message.user == current_user ? "sender" : "recipient"  %>">
+          <p><%= message.body %></p>
+        </div>
+        <% end %>
+        <%= simple_form_for [@selected_convo, Message.new] do |f| %>
+          <%= f.input :body %>
+          <%= f.submit "Submit you message here"  %>
+        <% end %>
       <% end %>
-    </table>
-   </div>
+    </div>
   </div>
 </div>
-<div class="message-display">
-  <%if @selected_convo %>
-    <%  @selected_convo.messages.each do |message| %>
-    <div class="message-<%= message.user == current_user ? "sender" : "recipient"  %>">
-      <p><%= message.body %></p>
-    </div>
-    <% end %>
-    <%= simple_form_for [@selected_convo, Message.new] do |f| %>
-    <%= f.input :body %>
-    <%= f.submit "Submit you message here"  %>
-  <% end %>
-<% end %>
-</div>
-</div>
-</div>
-
-
