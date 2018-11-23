@@ -35,7 +35,7 @@
             <div class="inset"><span class='big'>3</span> <span class='little'>/ 5 Crime</span></div>
           </div>
 
-          <div class="radial-progress" data-score="1">
+          <div class="radial-progress" data-score="5">
             <div class="circle">
               <div class="mask full">
                 <div class="fill"></div>
@@ -45,46 +45,47 @@
                 <div class="fill fix"></div>
               </div>
             </div>
-            <div class="inset"><span class='big'>1</span> <span class='little'>/ 5 Price</span></div>
+            <div class="inset"><span class='big'>5</span> <span class='little'>/ 5 Price</span></div>
           </div>
 
-          <div class="radial-progress" data-score="4">
-            <div class="circle">
-              <div class="mask full">
-                <div class="fill"></div>
-              </div>
-              <div class="mask half">
-                <div class="fill"></div>
-                <div class="fill fix"></div>
-              </div>
+
+        <div class="radial-progress" data-score="4">
+          <div class="circle">
+            <div class="mask full">
+              <div class="fill"></div>
             </div>
-            <div class="inset"><span class='big'>4</span> <span class='little'>/ 5 Overall</span></div>
+            <div class="mask half">
+              <div class="fill"></div>
+              <div class="fill fix"></div>
+            </div>
           </div>
+          <div class="inset"><span class='big'>4</span> <span class='little'>/ 5 Overall</span></div>
         </div>
+      </div>
 
-      </div>
     </div>
-    <div id="Crime Rates" class="container tabcontent">
-      <div class="chart-container" height:40vh; width:80vw">
-        <canvas id="myChart" data-crime-rate="<%= @property.postcode.crime_rating %>"></canvas>
-      </div>
+  </div>
+  <div id="Crime Rates" class="container tabcontent">
+    <div class="chart-container" height:40vh; width:80vw">
+      <canvas id="myChart" data-crime-rate="<%= @property.postcode.crime_rating %>"></canvas>
     </div>
-    <br>
-    <br>
-    <div id="Average Value" class="container tabcontent">
-      <div class="chart-container" height:40vh; width:80vw">
-        <canvas id="myBarChart" data-avg-current-first ="<%= @property.postcode.avg_current_first.gsub(/[\[\"\]]/, '') %>"></canvas>
-      </div>
+  </div>
+  <br>
+  <br>
+  <div id="Average Value" class="container tabcontent">
+    <div class="chart-container" height:40vh; width:80vw">
+      <canvas id="myBarChart" data-avg-current-first ="<%= @property.postcode.avg_current_first.gsub(/[\[\"\]]/, '') %>"></canvas>
     </div>
+  </div>
       <!-- <h3>Average Current Price: <%#= @property_details[:avg_current_first_column].first %></h3>
         <h3>Average Price per sq foot: <%#= @property_details[:avg_price_foot].first %></h3> -->
 
-      <br>
-      <br>
-      <div id="Average Price Paid" class="container tabcontent">
-        <div class="chart-container" height:40vh; width:80vw">
-          <canvas id="scatterChart" data-avg-paid ="<%= @property.postcode.avg_paid.first.gsub(/[\[\"\]]/, '') %>"</canvas>
-        </div>
+        <br>
+        <br>
+        <div id="Average Price Paid" class="container tabcontent">
+          <div class="chart-container" height:40vh; width:80vw">
+            <canvas id="lineGraph" data-avg-paid ="<%= @property.postcode.avg_paid.first.gsub(/[\[\"\]]/, '') %>"</canvas>
+          </div>
 
      <!--  <h3>City: <%#= @hometrack_details[:cities].first %></h3>
       <h3>Average Price: <%#= @hometrack_details[:average_price].first %></h3>
