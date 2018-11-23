@@ -10,7 +10,7 @@ const myChart = new Chart(ctx, {
             label: 'Crime rating',
             data: [crimeRate],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 0, 255, 0.2)',
                 'rgba(54, 162, 235, 0.2)'
             ],
             borderColor: [
@@ -68,25 +68,24 @@ const myBarChart = new Chart(ctx2, {
 });
 
 
-
-
-// new Chart(document.getElementById("pie-chart"), {
-//     type: 'pie',
-//     data: {
-//       labels: ["Average Current Price", "Average Price per sq foot", "Average price paid", "Average area price"],
-//       datasets: [{
-//         label: "Market Statistics",
-//         backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-//         data: [,5267,734,784,]
-//       }]
-//     },
-//     options: {
-//       title: {
-//         display: true,
-//         text: 'Market Statistics'
-//       }
-//     }
-// });
+new Chart(document.getElementById("lineGraph"), {
+    type: 'line',
+    data: {
+      labels: ["Detached", "Semi-Detached", "Terraced", "Flats"],
+      datasets: [{
+        label: "Average Price Paid over 12 months",
+        backgroundColor: ["transparent"],
+        borderColor: 'rgba(0,0,0)',
+        data: [avgDataset[0] * 1000 , avgDataset[2] * 1000, avgDataset[3] * 1000, avgDataset[1] * 1000]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Average Price Paid'
+      }
+    }
+});
 
 
 
