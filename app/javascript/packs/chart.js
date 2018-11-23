@@ -39,7 +39,7 @@ const myBarChart = new Chart(ctx2, {
         labels: ["Detached", "Semi-Detached", "Terraced", "Flats"],
         datasets: [{
             label: 'Average current value of properties',
-            data: [avgDataset[0] * 1000 , avgDataset[2] * 1000, avgDataset[3] * 1000, avgDataset[1] * 1000],
+            data: [avgDataset[0] * 1000 , avgDataset[1] * 1000, avgDataset[2] * 1000, avgDataset[3] * 1000],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
