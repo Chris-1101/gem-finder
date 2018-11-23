@@ -28,8 +28,8 @@ class PropertiesController < ApplicationController
     # It overwrites the variable holding scraped results and doesn't actually
     # return anything since the DB doesn't have saved instances of Property yet
     # search_house uses .new and doesn't .save --> in memory, never saved to DB
-
-    # @properties = Property.where.not(latitude: nil, longitude: nil)
+#
+    # @properties2 = Property.where.not(latitude: nil, longitude: nil)
 
     @markers = @properties.map do |property|
       {

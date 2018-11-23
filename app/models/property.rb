@@ -6,7 +6,7 @@ class Property < ApplicationRecord
   mount_uploader :photo, PhotoUploader
 
   # Mapbox
-  geocoded_by :location
-  after_validation :geocode, if: :will_save_change_to_location?
+  geocoded_by :postcode
+  after_validation :geocode, if: :will_save_change_to_postcode?
 
 end
