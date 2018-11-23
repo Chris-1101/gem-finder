@@ -1,11 +1,15 @@
 <div class="home-container">
 <div class="wrap">
    <div class="search">
+      <!-- <input type="text"> -->
       <input type="text" id="property_address"class="searchTerm" placeholder="Enter a location...">
       <button type="submit" class="searchButton" >
         <i class="fa fa-search"></i>
      </button>
    </div>
 </div>
+<%= content_for(:after_js) do %>
+  <%= javascript_pack_tag 'map' %>
+<% end %>
 
 </div>
