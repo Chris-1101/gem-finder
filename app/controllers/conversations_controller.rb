@@ -1,7 +1,10 @@
 class ConversationsController < ApplicationController
 
   def index
-    @users = User.all
+    favourite_postcodes = current_user.trackings.map(&:property).map(&:postcode).uniq
+    same_postcode_trackings = favourite_postcodes.map(&:properties).flatten.map(&:trackings).flatten.reject { |tracking| tracking.user == current_user }
+    @similar_users = same_postcode_trackings.map(&:user).uniq
+    # @users.map { |user| user.trackings.select { |tracking| c}
     @conversations = Conversation.where(sender: current_user).or(Conversation.where(recipient: current_user))
     if params[:selected_convo]
       @selected_convo = Conversation.find(params[:selected_convo])
