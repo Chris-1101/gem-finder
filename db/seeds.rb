@@ -76,6 +76,8 @@ def scrape_zoopla(location)
     description = element.search('.listing-results-attr + p').text
     price = element.search('.listing-results-price').text
 
+    next if photo.include?('noimage')
+
     property = Property.new(name: name, address: address, price: price, description: description)
     property.remote_photo_url = photo
     properties << property
