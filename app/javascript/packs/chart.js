@@ -54,6 +54,7 @@ const myBarChart = new Chart(ctx2, {
         }]
     },
     options: {
+
         scales: {
             yAxes: [{
                 ticks: {
