@@ -83,7 +83,7 @@
       <br>
       <div id="Average Price Paid" class="container tabcontent">
         <div class="chart-container" height:40vh; width:80vw">
-          <canvas id="lineGraph" data-avg-paid ="<%= @property.postcode.avg_paid.first.gsub(/[\[\"\]]/, '') %>"</canvas>
+          <canvas id="scatterChart" data-avg-paid ="<%= @property.postcode.avg_paid.first.gsub(/[\[\"\]]/, '') %>"</canvas>
         </div>
 
      <!--  <h3>City: <%#= @hometrack_details[:cities].first %></h3>
