@@ -5,17 +5,17 @@ const crimeRate = document.getElementById("myChart").dataset.crimeRate
 const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Crime Rate", " ", " ", " "],
+        labels: ["Crime Rating in this postcode", "UK Average Crime Rating"],
         datasets: [{
             label: 'Crime rating',
-            data: [crimeRate],
+            data: [crimeRate, 57.8],
             backgroundColor: [
-                'rgba(255, 0, 255, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
+                'rgba(0, 128, 128, 0.2)',
+                'rgba(128, 0, 0, 0.2)',
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)'
+                'rgba(0, 128, 128, 0.2)',
+                'rgba(128, 0, 0, 0.2)'
             ],
             borderWidth: 1
         }]
