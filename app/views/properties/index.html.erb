@@ -9,6 +9,7 @@ Create</button>
     <div class="row">
       <% @properties.each do |property| %>
         <% next if property.price.nil? %>
+        <% next if property.photo_url.include?('noimage') %>
 
         <% # All this should probably happen somewhere else %>
         <% address_parts = property.address.split(',') %>
@@ -29,15 +30,18 @@ Create</button>
                 <h6><%= property.price.split(' ')[0] %></h6>
               </div>
               <p>
-                <%= property.description %>
+                <% content_max_len = 170 %>
+                <% description = property.description.first(content_max_len) %>
+                <% description += " [...]" if property.description.length > content_max_len %>
+                <%= description %>
               </p>
             </div>
             <div class="property-card-footer">
               <a>More Info</a>
-              <%= link_to "Track", trackings_path(tracking: {user_id: current_user.id, property_id: property.id }), method: :post  %>
+              <a>Track</a>
             </div>
-            <!-- <a href="#" class="property-card-link"></a>
-            <a href="" class="property-card-track"></a> -->
+            <%= link_to "", property_path(property), class: "property-card-link" %>
+            <%= link_to "", trackings_path(tracking: {user_id: current_user.id, property_id: property.id }), method: :post, class: "property-card-track"  %>
           </div>
         </div>
       <% end %>
