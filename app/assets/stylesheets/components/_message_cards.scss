@@ -75,26 +75,27 @@
   color: white;
   font-weight: bold;
   font-size: 15px;
-  background-color: blue;
+  background-color: #1B8CFB;
   border-radius: 10px;
   height: auto;
   text-align: center;
   width: fit-content;
   margin-bottom: 10px;
+  padding: 7px;
   // position: absolute;
 }
 
 .message-recipient {
  color: black;
-  font-weight: bold;
   font-size: 15px;
-  background-color: grey;
+  background-color: #dad6d6;
   border-radius: 10px;
   height: auto;
   text-align: center;
   width: fit-content;
   margin-bottom: 10px;
   align-self: flex-end;
+  padding: 7px;
 
 }
 
