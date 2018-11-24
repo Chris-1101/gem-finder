@@ -1,0 +1,32 @@
+// Add this if we want a background image to our log in page
+.border-form-wrapper {
+    background-image: linear-gradient(-225deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.6) 50%), url('https://images.unsplash.com/photo-1522735555435-a8fe18da2089?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f0bdee14b2ddec019e426a25c3b96efd&auto=format&fit=crop&w=1800&h=600&q=60');
+    padding: 20px 0 1px 0;
+
+}
+
+.border-form-div {
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  margin: 40px auto 100px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+          box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.border-form-div .form-signin-heading,
+.border-form-div .checkbox {
+  margin-bottom: 10px;
+}
+.border-form-div input[type="text"],
+.border-form-div input[type="email"],
+.border-form-div input[type="password"] {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+}
