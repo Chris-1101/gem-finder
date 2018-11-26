@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/botui/build/botui.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/botui/build/botui-theme-default.css" />
+    <script>
+      const conversation = {
+        variant: 2,
+        firstQuestion: 'Want to see the best property opportunities for today?',
+        firstAnswers: [
+          'Sure',
+          'No Thanks, let me search!',
+        ],
+        secondQuestions: [
+          'Check this out..',
+          'Oops. Are you in a rush?',
+        ],
+        secondAnswers: [
+          'View Properties',
+          'Not just yet',
+        ],
+        byeBye: [
+          'Thanks! Have fun!',
+          'Ok, ok just wanted to help... Bye, Bye',
+        ],
+      };
+    </script>
+    <style type="text/css">
+
+      #frontend-bot {
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
+
+        /*box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.2);*/
+        width: 400px;
+        padding: 24px;
+      }
+      #frontend-bot .icon {
+        position: absolute;
+        bottom: 24px;
+        left: 24px;
+        width: 100px;
+      }
+      #frontend-bot #frontend-bot-chat {
+        margin-left: 100px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+    </script>
+    <div id="frontend-bot">
+      <img class="icon" src="http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42486-house-icon.png"/>
+      <div id="frontend-bot-chat">
+        <bot-ui></bot-ui>
+      <div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/vue/latest/vue.min.js"></script>
+    <script src="https://unpkg.com/botui/build/botui.min.js"></script>
+    <script type="text/javascript">
+    const botui = new BotUI('frontend-bot-chat');
+    const name = null;
+
+    function message(delay, content) {
+      return botui.message.bot({
+        delay: delay,
+        content: content
+      });
+    }
+
+    function button(delay, action) {
+      return botui.action.button({
+        delay: delay,
+        action: action
+      });
+    }
+
+    function close() {
+      setTimeout(function () {
+        const el = document.getElementById('frontend-bot')
+        el.parentNode.removeChild(el);
+      }, 3000);
+    }
+
+    message(0, conversation.firstQuestion)
+    .then(function () {
+      return button(1000,[
+        {
+          text: conversation.firstAnswers[0],
+          value: 'sure'
+        },
+        {
+          text: conversation.firstAnswers[1],
+          value: 'no_thanks'
+        }
+      ]);
+    }).then(function (res) {
+      if (res.value === 'no_thanks') {
+        return message(1000, conversation.byeBye[1]).then(close);
+      } else { if (res.value === 'sure') { {
+        return button(0,[
+        {
+          text: conversation.secondAnswers[0],
+          value: 'view'
+        },
+      ]);
+      }}}
+
+    }).then(function (res) {
+      if (res.value === 'no_need') {
+        return message(1000, conversation.byeBye[1])
+      }
+      setTimeout(function () {
+            window.location.href = 'http://localhost:3000/properties';
+      }, 1000);
+
+      return message(1000, conversation.byeBye[0])
+    }).then(close);
+
+    </script>
+  </body>
+</html>
