@@ -5,8 +5,10 @@ class TrackingsController < ApplicationController
   end
 
   def destroy
+    @tracking = Tracking.find(params[:id])
+    @tracking.destroy
     @user = current_user
-    redirect_to user_trackings_path(@user)
+    redirect_to user_path(@user)
   end
 
   def create
