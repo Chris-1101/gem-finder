@@ -2,10 +2,12 @@
   <div class="properties-wrapper">
     <div class="container">
       <div class="row">
+        <% if @properties.empty? %>
+          <h3>No results match <%= params[:location] %></h1>
+        <% end %>
         <% @properties.sample(30).each do |property| %>
           <% next if property.price.nil? %>
           <% next if property.photo_url.include?('noimage') %>
-
           <% # All this should probably happen somewhere else %>
           <% address_parts = property.address.split(',') %>
           <% url = "http://api.postcodes.io/outcodes/#{property.postcode.outcode}" %>
