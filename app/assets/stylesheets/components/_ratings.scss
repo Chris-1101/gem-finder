@@ -1,6 +1,5 @@
-span{
-  font-family: 'Georgia';
-  // opacity: 0;
+span {
+  padding-top: 20px;
 }
 $qt-red: #EA463D;
 @mixin mediaquery($point, $ele: min) {
@@ -28,9 +27,9 @@ $qt-red: #EA463D;
 }
 
 .radial-progress {
-  $circle-size: 200px;
+  $circle-size: 180px;
   $circle-size-sml: 85px;
-  float:left;
+  float: left;
   $circle-background: #d6dadc;
   $circle-color: #97a71d;
   $inset-size: 90px;
@@ -82,7 +81,7 @@ $qt-red: #EA463D;
       }
       .fill {
         clip: rect(0px, $circle-size/2, $circle-size, 0px);
-        background-color: $qt-red;
+        background-color: $colour-dark;
         @include mediaquery(480px,max){
           clip: rect(0px, $circle-size-sml/2, $circle-size-sml, 0px);
         }
