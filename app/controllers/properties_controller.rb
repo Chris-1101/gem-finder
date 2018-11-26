@@ -22,7 +22,14 @@ class PropertiesController < ApplicationController
     # @properties = search_house
     # @properties = Property.all
     # search_house
-    @properties = Property.all
+    search_query = params[:location]
+
+    if (search_query)
+      radius = (search_query.include?('City of London')) ? 10 : 3
+      @properties = Property.near(search_query, radius)
+    else
+      @properties = Property.all
+    end
 
     # Had to comment this out:
     # It overwrites the variable holding scraped results and doesn't actually

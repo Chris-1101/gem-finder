@@ -1,16 +1,17 @@
 <div class="home-container">
-<div class="wrap">
-   <div class="search">
+  <div class="wrap">
+    <div class="search">
       <!-- <input type="text"> -->
-      <input type="text" id="property_address"class="searchTerm" placeholder="Enter a location...">
-      <%= link_to properties_path, class: "searchButton" do  %>
-      <i class="fa fa-search"></i>
-      <% end %>
-
-   </div>
-</div>
-<%= content_for(:after_js) do %>
-  <%= javascript_pack_tag 'map' %>
-<% end %>
-
+      <%= form_tag properties_path, method: :get do |f| %>
+        <input type="text" name="location" id="property_address" class="searchTerm" placeholder="Enter a location..." />
+        <input type="submit" />
+        <!-- <%= link_to properties_path, class: "searchButton" do  %>
+          <i class="fa fa-search"></i>
+        <% end %> -->
+      <% end%>
+    </div>
+  </div>
+  <%= content_for(:after_js) do %>
+    <%= javascript_pack_tag 'map' %>
+  <% end %>
 </div>
