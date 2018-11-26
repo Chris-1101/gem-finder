@@ -21,6 +21,12 @@ const myChart = new Chart(ctx, {
         }]
     },
     options: {
+      title: {
+        display: true,
+        position: 'top',
+        fontSize: '23',
+        fontFamily: 'Helvetica',
+        fontColor: '#666',
         scales: {
             yAxes: [{
                 ticks: {
@@ -29,6 +35,7 @@ const myChart = new Chart(ctx, {
             }]
         }
     }
+  }
 });
 
 const ctx2 = document.getElementById("myBarChart").getContext('2d');

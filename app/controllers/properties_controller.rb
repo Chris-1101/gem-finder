@@ -62,6 +62,43 @@ class PropertiesController < ApplicationController
 
     @property = Property.find(params[:id])
 
+    crime_rating = @property.postcode.crime_rating
+    avg_area = JSON.parse(@property.postcode.avg_area).gsub(/[,.]/, '').to_i
+
+    property_value = ( (@property.price.gsub(/\s+/, "")[1..-1].gsub(",", "").to_f)) / avg_area * 100
+
+    national_crime = crime_rating.to_f / 57.8 * 100
+
+
+    @national_crime = 0
+    if national_crime < 51
+      @national_crime = 5
+    elsif national_crime < 86
+      @national_crime = 4
+    elsif national_crime < 100
+      @national_crime = 3
+    elsif national_crime < 130
+      @national_crime = 2
+    else
+      @national_crime = 1
+    end
+
+    @property_rating = 0
+    if property_value < 50
+      @property_rating = 5
+    elsif property_value < 75
+      @property_rating = 4
+    elsif property_value <= 100
+      @property_rating = 3
+    elsif property_value < 120
+      @property_rating = 2
+    else
+      @property_rating = 1
+    end
+
+    @opportunity_rating = ((@property_rating + @national_crime).to_f / 2).ceil
+
+
     # @crime_rates = []
     # @postcodes = postcodes.sample(10)
     # @postcodes.each { |postcode| @crime_rates << scrape_crime(postcode).gsub(/All Crime & ASB/, '') }

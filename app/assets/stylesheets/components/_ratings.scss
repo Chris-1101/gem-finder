@@ -26,6 +26,15 @@ $qt-red: #EA463D;
   }
 }
 
+.ratings-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.ratings {
+  padding: 20px;
+}
+
 .radial-progress {
   $circle-size: 180px;
   $circle-size-sml: 85px;
