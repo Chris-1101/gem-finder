@@ -6,49 +6,53 @@
     <button class="tablinks" onclick="openCity(event, 'Average Price Paid')">Average Price Paid</button>
   </div>
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-6">
-      <div id="Property Info" class="container tabcontent property_info">
-        <% if @property.photo? %>
-        <div class="showcard" style="background-image: url('<%= cl_image_path @property.photo, height: 300, width: 400 %>');background-size: cover;">
-        </div>
-        <div >
-          <h5><%= @property.address  %></h5>
-          <h5><strong><%= @property.price  %></strong></h5>
-          <%= link_to "Track Property", trackings_path(tracking: {property_id: @property,user_id: current_user}), method: :post, class: "btn btn-danger" %>
-        </div>
-        <% else %>
-        <div class="showcard" style="background-image: url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cdc84c9290e90088f8ab78270ee1ffdf&auto=format&fit=crop&w=500&q=60');">
-          <% end %>
-        </div>
-        <div class='container'>
-          <div class="radial-progress" data-score="3">
-            <div class="circle">
-              <div class="mask full">
-                <div class="fill"></div>
-              </div>
-              <div class="mask half">
-                <div class="fill"></div>
-                <div class="fill fix"></div>
-              </div>
+  <div id="Crime Rates" class="container tabcontent">
+    <div class="chart-container" height:40vh; width:80vw">
+      <canvas id="myChart" data-crime-rate="<%= @property.postcode.crime_rating %>"></canvas>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div id="Average Value" class="container tabcontent">
+    <div class="chart-container" height:40vh; width:80vw">
+      <canvas id="myBarChart" data-avg-current-first ="<%= @property.postcode.avg_current_first.gsub(/[\[\"\]]/, '') %>"></canvas>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div id="Average Price Paid" class="container tabcontent">
+    <div class="chart-container" height:40vh; width:80vw">
+      <canvas id="lineGraph" data-avg-paid ="<%= @property.postcode.avg_paid.first.gsub(/[\[\"\]]/, '') %>"</canvas>
+    </div>
+  </div>
+
+  <div id="Property Info" class="tabcontent" style="display: block">
+    <div class="row">
+      <div class='radial-container'>
+        <div class="radial-progress" data-score="3">
+          <div class="circle">
+            <div class="mask full">
+              <div class="fill"></div>
             </div>
-            <div class="inset"><span class='big'>3</span> <span class='little'>/ 5 Crime</span></div>
-          </div>
-
-          <div class="radial-progress" data-score="5">
-            <div class="circle">
-              <div class="mask full">
-                <div class="fill"></div>
-              </div>
-              <div class="mask half">
-                <div class="fill"></div>
-                <div class="fill fix"></div>
-              </div>
+            <div class="mask half">
+              <div class="fill"></div>
+              <div class="fill fix"></div>
             </div>
-            <div class="inset"><span class='big'>5</span> <span class='little'>/ 5 Price</span></div>
           </div>
-
-
+          <div class="inset"><span class='big'>3</span> <span class='little'>/ 5 Crime</span></div>
+        </div>
+        <div class="radial-progress" data-score="5">
+          <div class="circle">
+            <div class="mask full">
+              <div class="fill"></div>
+            </div>
+            <div class="mask half">
+              <div class="fill"></div>
+              <div class="fill fix"></div>
+            </div>
+          </div>
+          <div class="inset"><span class='big'>5</span> <span class='little'>/ 5 Price</span></div>
+        </div>
         <div class="radial-progress" data-score="4">
           <div class="circle">
             <div class="mask full">
@@ -62,40 +66,30 @@
           <div class="inset"><span class='big'>4</span> <span class='little'>/ 5 Overall</span></div>
         </div>
       </div>
-
-    </div>
-  </div>
-  <div id="Crime Rates" class="container tabcontent">
-    <div class="chart-container" height:40vh; width:80vw">
-      <canvas id="myChart" data-crime-rate="<%= @property.postcode.crime_rating %>"></canvas>
-    </div>
-  </div>
-  <br>
-  <br>
-  <div id="Average Value" class="container tabcontent">
-    <div class="chart-container" height:40vh; width:80vw">
-      <canvas id="myBarChart" data-avg-current-first ="<%= @property.postcode.avg_current_first.gsub(/[\[\"\]]/, '') %>"></canvas>
-    </div>
-  </div>
-      <!-- <h3>Average Current Price: <%#= @property_details[:avg_current_first_column].first %></h3>
-        <h3>Average Price per sq foot: <%#= @property_details[:avg_price_foot].first %></h3> -->
-
-        <br>
-        <br>
-        <div id="Average Price Paid" class="container tabcontent">
-          <div class="chart-container" height:40vh; width:80vw">
-            <canvas id="lineGraph" data-avg-paid ="<%= @property.postcode.avg_paid.first.gsub(/[\[\"\]]/, '') %>"</canvas>
+      <div class="col-xs-12 col-sm-6">
+        <div class="container tabcontent property_info">
+          <% if @property.photo? %>
+          <div class="showcard" style="background-image: url('<%= cl_image_path @property.photo, height: 300, width: 400 %>');background-size: cover;">
+          </div>
+          <div class="propery-show-text" >
+            <h5><%= @property.address  %></h5>
+            <h5><%= @property.description  %></h5>
+            <div class="property-price-link">
+              <h5><strong><%= @property.price  %></strong></h5>
+              <%= link_to "Track Property", trackings_path(tracking: {property_id: @property,user_id: current_user}), method: :post, class: "btn btn-danger" %>
+            </div>
+          </div>
+          <% else %>
+          <div class="showcard" style="background-image: url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cdc84c9290e90088f8ab78270ee1ffdf&auto=format&fit=crop&w=500&q=60');">
+            <% end %>
           </div>
 
-     <!--  <h3>City: <%#= @hometrack_details[:cities].first %></h3>
-      <h3>Average Price: <%#= @hometrack_details[:average_price].first %></h3>
-      <h3>Last 12 months: <%#= @hometrack_details[:twelve_months].first %></h3>
-      <h3>Price action in the last month: <%#= @hometrack_details[:last_month].first %></h3> -->
+        </div>
+      </div>
     </div>
-    <script>
-    </script>
   </div>
 </div>
+
 
 <script>
   function openCity(evt, cityName) {
