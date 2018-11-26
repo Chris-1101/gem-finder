@@ -72,10 +72,15 @@
   </div>
   <br>
   <br>
-  <div id="Average Value" class="container tabcontent">
-    <div class="chart-container" height:40vh; width:80vw">
+  <div id="Average Value" class="container tabcontent" style="display: flex; justify-content: space-between;">
+    <div class="chart-container" style="height:30vh; width:40vw">
       <canvas id="myBarChart" data-avg-current-first ="<%= @property.postcode.avg_current_first.gsub(/[\[\"\]]/, '') %>"></canvas>
     </div>
+    <div class="chart-container" style="height:30vh; width:40vw">
+      <canvas id="myBarCharts" data-avg-price-foot ="<%= @property.postcode.avg_price_foot.gsub(/[\[\"\]]/, '') %>"></canvas>
+    </div>
+  </div>
+   <div id="Average Price per foot" class="container tabcontent">
   </div>
       <!-- <h3>Average Current Price: <%#= @property_details[:avg_current_first_column].first %></h3>
         <h3>Average Price per sq foot: <%#= @property_details[:avg_price_foot].first %></h3> -->
