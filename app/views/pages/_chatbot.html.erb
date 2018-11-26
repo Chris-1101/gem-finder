@@ -9,7 +9,7 @@
         firstQuestion: 'Want to see the best property opportunities for today?',
         firstAnswers: [
           'Sure',
-          'No Thanks, let me search!',
+          'No Thanks, leave me alone!',
         ],
         secondQuestions: [
           'Check this out..',
@@ -84,7 +84,7 @@
       }, 3000);
     }
 
-    message(0, conversation.firstQuestion)
+    message(5000, conversation.firstQuestion)
     .then(function () {
       return button(1000,[
         {
