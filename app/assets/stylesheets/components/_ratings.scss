@@ -1,6 +1,6 @@
-span {
-  padding-top: 20px;
-}
+// span {
+//   padding-top: 20px;
+// }
 $qt-red: #EA463D;
 @mixin mediaquery($point, $ele: min) {
   @if $point == standard {
