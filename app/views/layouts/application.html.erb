@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>GemFinder</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Poppins:400,900" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_pack_tag "map" %>
@@ -12,7 +13,11 @@
   </head>
   <body>
     <%= render 'shared/flashes' %>
+    <% if current_page?(controller: 'pages', action: 'home') %>
+    <%= render 'shared/homenavbar' %>
+  <% else %>
     <%= render 'shared/navbar' %>
+  <% end %>
     <%= render 'shared/user_modals' if params["controller"] == "properties" && params["action"] == "index" %>
 
     <%= yield %>
