@@ -32,6 +32,51 @@
     </div>
   </div>
 
+  <% if @property_rating < 3 %>
+    <% property_rating_color = 'red' %>
+  <% elsif @property_rating > 3 %>
+    <% property_rating_color = 'green' %>
+  <% else %>
+    <% property_rating_color = 'yellow' %>
+  <% end %>
+
+  <% if @national_crime < 3 %>
+    <% crime_rating_color = 'red' %>
+  <% elsif @national_crime > 3 %>
+    <% crime_rating_color = 'green' %>
+  <% else %>
+    <% crime_rating_color = 'yellow' %>
+  <% end %>
+
+  <% if @opportunity_rating < 3 %>
+    <% opportunity_rating_color = 'red' %>
+  <% elsif @opportunity_rating > 3 %>
+    <% opportunity_rating_color = 'green' %>
+  <% else %>
+    <% opportunity_rating_color = 'yellow' %>
+  <% end %>
+
+<div class="ratings-container">
+  <div>
+    <div class="ratings" style="background-color: <%= crime_rating_color %>">
+      <h1>Crime</h1>
+    </div>
+    <h3><%= @national_crime %>  / 5</h3>
+  </div>
+  <div>
+    <div class="ratings" style="background-color: <%= opportunity_rating_color %>">
+      <h1>Opportunity</h1>
+    </div>
+    <h3><%= @opportunity_rating %> / 5</h3>
+  </div>
+  <div>
+    <div class="ratings" style="background-color: <%= property_rating_color %>">
+      <h1>Property</h1>
+    </div>
+    <h3><%= @property_rating %> / 5</h3>
+  </div>
+</div>
+
   <div id="Property Info" class="tabcontent" style="display: block">
     <div class="row">
       <div class="container tabcontent property_info">
@@ -51,43 +96,7 @@
           <% end %>
         </div>
       </div>
-      <div class="radial-container">
-        <div class="radial-progress" data-score="3">
-          <div class="circle">
-            <div class="mask full">
-              <div class="fill"></div>
-            </div>
-            <div class="mask half">
-              <div class="fill"></div>
-              <div class="fill fix"></div>
-            </div>
-          </div>
-          <div class="inset"><span class='big'>3</span> <span class='little'>/ 5 Crime</span></div>
-        </div>
-        <div class="radial-progress" data-score="5">
-          <div class="circle">
-            <div class="mask full">
-              <div class="fill"></div>
-            </div>
-            <div class="mask half">
-              <div class="fill"></div>
-              <div class="fill fix"></div>
-            </div>
-          </div>
-          <div class="inset"><span class='big'>5</span> <span class='little'>/ 5 Price</span></div>
-        </div>
-        <div class="radial-progress" data-score="4">
-          <div class="circle">
-            <div class="mask full">
-              <div class="fill"></div>
-            </div>
-            <div class="mask half">
-              <div class="fill"></div>
-              <div class="fill fix"></div>
-            </div>
-          </div>
-          <div class="inset"><span class='big'>4</span> <span class='little'>/ 5 Overall</span></div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -111,5 +120,4 @@
 
 <%= content_for(:after_js) do %>
 <%= javascript_pack_tag 'chart' %>
-<%= javascript_pack_tag 'ratings' %>
 <% end %>
