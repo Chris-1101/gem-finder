@@ -1,4 +1,6 @@
 class Property < ApplicationRecord
+ include Filterable
+
   belongs_to :postcode
   has_many :trackings
 

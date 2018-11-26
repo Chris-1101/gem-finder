@@ -18,11 +18,29 @@ class PropertiesController < ApplicationController
   end
 
   def index
+      @properties = Property.all.includes(:postcode)
+    if params[:location].present?
+      @properties = @properties.near(params[:location], 5)
+    end
+
+    if params[:bedrooms].present?
+      @properties = @properties.where(bedrooms: params[:bedrooms].to_i)
+    end
+
+    bedrooms = @properties.map do |property|
+      property.bedrooms
+    end
+
+    if params[:price].present?
+      @properties = @properties.where("price <= ?", params[:price].to_i)
+    end
+
+    @max_bedrooms = bedrooms.max
     @property = Property.new
     # @properties = search_house
     # @properties = Property.all
     # search_house
-    @properties = Property.all
+
 
     # Had to comment this out:
     # It overwrites the variable holding scraped results and doesn't actually
@@ -87,8 +105,10 @@ class PropertiesController < ApplicationController
       description = element.search('.listing-results-attr + p').text
       price = element.search('.listing-results-price').text
 
+
       property = Property.new(name: name, address: address, price: price, description: description)
       property.remote_photo_url = photo
+
       properties << property
       properties.take(10)
     end
