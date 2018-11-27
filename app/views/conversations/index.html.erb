@@ -1,63 +1,83 @@
-<div class="ui segment">
-  <h3 class="friends">People Who Tracked Similar Properties..</h3>
-  <div class="ui list" style="margin-top: 50px;">
-  <table>
-    <div class="ui list">
-      <% @similar_users.each do |user| %>
+<div class="messenger">
+  <h1>Gemfinder Messenger!</h1>
+  <p><i class="fas fa-comments" style="margin-left: 30px;
+  "></i></p>
+</div>
+<div class="ui segment" style="background-color: #FFFFFF;">
+  <div class="ui-list">
+    <table>
+      <div class="ui list">
+        <% @similar_users.each do |user| %>
         <div class="item">
           <%= user.email %> <%= link_to "Message me!", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post" %>
         </div>
-      <% end %>
-    </div>
-  </table>
-  <div class="all-of-it">
-    <div class="ui list">
-      <div class="item">
-        <% @conversations.each do |conversation| %>
-          <% if conversation.sender_id == current_user.id %>
-            <% recipient = User.find(conversation.recipient_id) %>
-          <% else %>
-            <% recipient = User.find(conversation.sender_id) %>
-          <% end %>
-          <%= link_to conversations_path({ selected_convo: conversation.id }) do%>
-            <div class="convo-select">
-              <%= cl_image_tag recipient.photo if recipient.photo? %>
-              <div>
-                <p class="convo-name"><%= recipient.name %></p>
-                <p><%= conversation&.messages&.last&.created_at&.strftime('%I:%M%P') %></p>
-              </div>
-            </div>
-          <% end %>
         <% end %>
       </div>
-      <div class="ui segment">
-        <h3 class="users-all">All Users</h3>
-        <div class="ui list" style="margin-top: 50px;">
-          <table>
-            <% User.all.each do |user| %>
-              <tr style="margin-bottom: 10px;">
-                <td class="item gap"><%= user.name %></td>
-                <td class="gap">
-                  <%= link_to "Message me!", conversations_path(sender_id: current_user.id, recipient_id: user.id), class: "message-me btn", method: "post" %>
-                </td>
-              </tr>
-            <% end %>
-          </table>
+    </table>
+    <div class="all-of-it">
+      <div class="ui list">
+        <div class="item">
+          <% @conversations.each do |conversation| %>
+          <% if conversation.sender_id == current_user.id %>
+          <% recipient = User.find(conversation.recipient_id) %>
+          <% else %>
+          <% recipient = User.find(conversation.sender_id) %>
+          <% end %>
+          <%= link_to conversations_path({ selected_convo: conversation.id }) do%>
+          <div class="convo-select">
+            <%= cl_image_tag recipient.photo if recipient.photo? %>
+            <div>
+             <p class="convo-name"><%= recipient.name %></p>
+             <p class="slice"><%= conversation.messages.last.body.slice!(0..10) %>..</p>
+           </div>
+
+           <% unread_messages = [] %>
+           <% conversation.messages.each do |message| %>
+           <% unread_messages << message %>
+           <% end %>
+           <% unread_messages = unread_messages.reject { |message| message.read || message.user_id == current_user.id }.count %>
+           <% if unread_messages.zero? %>
+           <div></div>
+           <% else %>
+           <div class="positioning-sarah">
+            <%= unread_messages %>
+          </div>
+          <% end %>
         </div>
+        <% end %>
+        <% end %>
       </div>
+
     </div>
     <div class="message-display">
       <%if @selected_convo %>
-        <%  @selected_convo.messages.each do |message| %>
+      <%  @selected_convo.messages.each do |message| %>
+      <% if message.user == current_user %>
+      <div class="message-holder-<%= message.user == current_user ? "sender" : "recipient"  %>"">
+        <%= cl_image_tag message.user.photo, class: "avatar-message" %>
         <div class="message-<%= message.user == current_user ? "sender" : "recipient"  %>">
-          <p><%= message.body %></p>
+          <p class="message-content"><%= message.body %></p>
+          <p class="message-date"> <%= message&.created_at&.strftime('%F:%H:%M') %></p>
         </div>
-        <% end %>
-        <%= simple_form_for [@selected_convo, Message.new] do |f| %>
-          <%= f.input :body %>
-          <%= f.submit "Submit you message here"  %>
-        <% end %>
+      </div>
+      <% else %>
+      <div class="message-holder-<%= message.user == current_user ? "sender" : "recipient"  %>"">
+        <div class="message-<%= message.user == current_user ? "sender" : "recipient"  %>">
+          <p class="message-content"><%= message.body %></p>
+          <p class="message-date"> <%= message&.created_at&.strftime('%F:%H:%M') %></p>
+        </div>
+        <%= cl_image_tag message.user.photo, class: "avatar-message" %>
+      </div>
+      <% end %>
+      <% end %>
       <% end %>
     </div>
+  </div>
+  <div class="body-type">
+    <%= simple_form_for [@selected_convo, Message.new] do |f| %>
+    <%= f.input :body, placeholder: "type your message here..", label: false %>
+    <%= f.submit "Send", class: "message-btn"  %>
+    <% end %>
+
   </div>
 </div>

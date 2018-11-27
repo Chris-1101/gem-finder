@@ -8,6 +8,9 @@ class ConversationsController < ApplicationController
     @conversations = Conversation.where(sender: current_user).or(Conversation.where(recipient: current_user))
     if params[:selected_convo]
       @selected_convo = Conversation.find(params[:selected_convo])
+      @selected_convo.messages.each do |message|
+        message.update(read: true) if message.user_id != current_user.id
+      end
     else
      @selected_convo = @conversations.last
     end

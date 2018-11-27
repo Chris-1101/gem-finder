@@ -10,7 +10,58 @@
 
   }
 }
+.positioning-sarah {
+  color: white;
+  text-align: center;
+  background-color: red;
+  font-weight: bold;
+  padding: 1px;
+  font-size: 11px;
+  height: 18px;
+  width: 18px;
+  left: 185px;
+  position: absolute;
+  border-radius: 50%;
 
+}
+
+
+.navbar-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  span {
+    padding-right: 5px;
+    padding-top: 0;
+  }
+}
+
+.fa-bell {
+  font-size: 24px;
+}
+
+.avatar-message {
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+}
+.circle-bell {
+  position: relative;
+}
+.positioning {
+  color: white;
+  text-align: center;
+  background-color: red;
+  font-weight: bold;
+  padding: 1px;
+  font-size: 11px;
+  height: 18px;
+  width: 18px;
+  left: 10px;
+  bottom: 15px;
+  position: absolute;
+  border-radius: 50%;
+}
 .convo-name {
   font-size: 15px;
   font-weight: bold;
@@ -63,39 +114,66 @@
 .message-display {
   flex: 1;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   margin-left: 40px;
   position: relative;
+  padding-top: 10px;
+}
 
+.message-body {
+  text-align: left;
+  margin: 0;
+}
+
+.message-date {
+  text-align: right;
+  margin: 0;
 
 }
+
+.message-holder-sender {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  }
 
 .message-sender {
   color: white;
   font-weight: bold;
+  margin-bottom: 10px;
   font-size: 15px;
   background-color: #1B8CFB;
   border-radius: 10px;
-  height: auto;
-  text-align: center;
+  min-height: 60px;
   width: fit-content;
-  margin-bottom: 10px;
   padding: 7px;
+  margin-left: 20px;
+  min-width: 250px;
   // position: absolute;
 }
 
+.slice {
+  color: #464646;
+}
+
+.message-holder-recipient {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  }
+
 .message-recipient {
- color: black;
+  color: black;
   font-size: 15px;
   background-color: #dad6d6;
   border-radius: 10px;
-  height: auto;
-  text-align: center;
+  min-height: 60px;
   width: fit-content;
-  margin-bottom: 10px;
-  align-self: flex-end;
   padding: 7px;
+  margin-bottom: 10px;
+  min-width: 250px;
+  margin-right: 20px;
 
 }
 
