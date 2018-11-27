@@ -1,12 +1,12 @@
 import 'mapbox-gl/dist/mapbox-gl.css'
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 
-const mapElement = document.getElementById('map');
+const mapElement = document.getElementById('map-background');
 
 if (mapElement) { // only build a map if there's a div#map to inject into
   mapboxgl.accessToken = mapElement.dataset.mapboxApiKey; // API key from `.env`
   const map = new mapboxgl.Map({
-    container: 'map',
+    container: 'map-background',
     style: 'mapbox://styles/mapbox/streets-v10'
   });
 
@@ -18,21 +18,28 @@ if (mapElement) { // only build a map if there's a div#map to inject into
         .addTo(map);
   });
 
-  if (markers.length === 0) {
-    map.setZoom(1);
-  } else if (markers.length === 1) {
-    map.setZoom(14);
-    map.setCenter([markers[0].lng, markers[0].lat]);
-  } else {
-    const bounds = new mapboxgl.LngLatBounds();
-    markers.forEach((marker) => {
-      bounds.extend([marker.lng, marker.lat]);
-    });
-    map.fitBounds(bounds, { duration: 500, padding: 75 })
-  }
-  //
-  // map.setZoom(7);
-  // map.setCenter([-0.12, 51.49]);
+  // if (markers.length === 0) {
+  //   map.setZoom(1);
+  // } else if (markers.length === 1) {
+  //   map.setZoom(14);
+  //   map.setCenter([markers[0].lng, markers[0].lat]);
+  // } else {
+  //   const bounds = new mapboxgl.LngLatBounds();
+  //   markers.forEach((marker) => {
+  //     bounds.extend([marker.lng, marker.lat]);
+  //   });
+  //   map.fitBounds(bounds, { duration: 500, padding: 75 })
+  // }
+
+  // map.flyTo({
+  //   center: [-0.12, 51.49],
+  //   offset: [300, 0],
+  //   speed: 0.8,
+  //   curve: .6
+  // });
+
+  map.setZoom(10.7);
+  map.setCenter([-0.3, 51.52]);
 }
 
 const addressInput = document.getElementById('property_address');
