@@ -29,8 +29,8 @@
             <div>
              <p class="convo-name"><%= recipient.name %></p>
              <% if conversation.messages.any? %>
-             <p class="slice"><%= conversation.messages.last.body.slice!(0..10) %>..</p>
-             <% end %>
+              <p class="slice"><%= conversation.messages.last.body.slice!(0..10) %>..</p>
+            <% end %>
            </div>
 
            <% unread_messages = [] %>
