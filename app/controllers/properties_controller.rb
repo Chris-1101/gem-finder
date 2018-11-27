@@ -20,6 +20,7 @@ class PropertiesController < ApplicationController
   def index
       @properties = Property.all.includes(:postcode)
     if params[:location].present?
+      p params[:location]
       search_query = params[:location]
       radius = (search_query.include?('City of London')) ? 10 : 3
       @properties = @properties.near(search_query, radius)
