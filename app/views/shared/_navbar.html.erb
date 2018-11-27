@@ -9,7 +9,38 @@
 
     <% if user_signed_in? %>
 
-      <%= link_to "Messages", conversations_path, class: "navbar-wagon-item navbar-wagon-link" %>
+
+
+    <% conversations = Conversation.where(recipient_id: current_user.id).or(Conversation.where(sender_id: current_user.id)) %>
+    <% unread_messages = [] %>
+    <% conversations.each do |conversation| %>
+    <% conversation.messages.each do |message| %>
+    <% unread_messages << message %>
+    <% end %>
+    <% end %>
+    <% unread_messages = unread_messages.reject { |message| message.read || message.user_id == current_user.id }.count %>
+    <% if unread_messages.zero? %>
+    <%= link_to "Messages", conversations_path, class: "navbar-wagon-item navbar-wagon-link" %>
+    <% else %>
+
+
+
+
+
+    <%= link_to conversations_path, class: "navbar-wagon-item navbar-wagon-link navbar-flex" do %>
+    <span>Messages</span>
+    <div class="circle-bell">
+      <div class="positioning">
+      <%= unread_messages %>
+      </div>
+      <i class="fas fa-bell"></i>
+    </div>
+    <% end %>
+    <% end %>
+
+
+
+
       <%= link_to "About Us", about_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "Properties Listing", properties_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <% if params["controller"] == "properties" && params["action"] == "index" %>
