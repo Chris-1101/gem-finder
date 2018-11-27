@@ -1,4 +1,7 @@
 <div id="properties-index">
+  <div id="map-background" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY']%>">
+    <!-- Map Background -->
+  </div>
   <div class="properties-wrapper">
       <div class="container">
     <div class="">
@@ -23,7 +26,7 @@
           <% response = JSON.parse(open(url).read) %>
           <% area = response["result"]["admin_ward"][0] %>
 
-          <div class="col-xs-12 col-md-6 col-lg-6">
+          <div class="col-xs-12 col-md-6 col-lg-6 inner-padded">
             <div class="property-card">
               <div class="property-card-header">
                 <p><%= address_parts[-1] %></p>
@@ -60,4 +63,5 @@
       </div>
       <div id="map" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY']%>"></div>
     </div>
+    <!-- <div id="map"></div> -->
   </div>
