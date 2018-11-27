@@ -95,9 +95,10 @@ end
 # --- Begin Seeding ---
 # =====================
 puts "Clearing database.."
-User.destroy_all
-Postcode.destroy_all
+Tracking.destroy_all
+# User.destroy_all
 Property.destroy_all
+Postcode.destroy_all
 
 # ================================
 # --- Create Instances of User ---
