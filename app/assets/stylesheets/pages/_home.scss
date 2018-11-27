@@ -1,12 +1,15 @@
 .home-container {
-  background-image:  url('https://images.unsplash.com/photo-1481277542470-605612bd2d61?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=eda6f34a3343980b50f2ba298103093f&auto=format&fit=crop&w=1900&q=60');
+  background-image:  url('https://images.pexels.com/photos/259962/pexels-photo-259962.jpeg?auto=compress&cs=tinysrgb&w=1800&h=850');
     background-position: absolute;
     background-size:cover;
     background-repeat: no-repeat;
     max-width: 100%;
     height: 100vh;
     margin: auto;
+
 }
+
+
 
 .homepage-title {
   font-family: 'Poppins', sans-serif;
@@ -14,6 +17,9 @@
   text-align: center;
   font-weight: bolder;
   font-size: 64px;
+  &:hover{
+      filter: blur(2px) opacity(80%);
+    }
 }
 
 .tagline-text{
@@ -22,11 +28,12 @@
   font-weight: bold;
   text-align: center;
   color: rgb(180, 180, 180)
+
 }
 .submit-button{
   background-color: #00ADB5;
   color: white;
-  padding: 10px 20px;
+  padding: 0 20px;
   border-radius: 0 5px 5px 0;
   border: none;
   font-size: 16px;
