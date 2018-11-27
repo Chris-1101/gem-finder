@@ -1,11 +1,12 @@
 <div class=container></div>
 <div class=headingdashboard>
-<h1>Welcome to your Dashboard:</h1>
-<h4>These are the properties that you have selected to track.</h4>
-<div class=buttonproperties>
-<%= link_to "Go back to all Properties", properties_path %>
+  <h1>Welcome to your Dashboard:</h1>
+  <h4>These are the properties that you have selected to track.</h4>
 </div>
-<% @trackings.each do |tracking| %>
+<div class="whatever">
+  <%= link_to "Go back to all Properties", properties_path, class: 'buttonproperties' %>
+</div>
+  <% @trackings.each do |tracking| %>
 <div class="col-xs-12 col-sm-6">
 <div class="property-card">
             <div class="property-card-header">
@@ -32,4 +33,4 @@
             </div>
         </div>
   <% end %>
-</div>
+

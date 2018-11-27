@@ -223,6 +223,7 @@
 .headingdashboard{
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+  color: #606060;
 }
 
 .property-price-show {
@@ -233,11 +234,30 @@
 .buttonproperties{
   text-align: center;
   font-size: 15px;
-  font-family: 'Open Sans', sans-serif;
-  color: black;
+  width: 170px;
+  padding: 10px 0;
+  background-color: #00ADB5;
+  position: relative;
+  border-radius: 3px;
+  text-align: center;
+  bottom: 100px;
+  right: 30px;
+    color: white;
+  text-decoration: none;
+  &:hover{
+  color: white;
+  opacity: 0.9;
+  text-decoration: none;
+  }
+}
+
+.whatever {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .contactheading{
   text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
+
