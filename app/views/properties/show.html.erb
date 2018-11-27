@@ -2,6 +2,7 @@
   <div class="show-banner">
     <div id="map" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY']%>"></div>
   </div>
+  <div class="show-content-and-chart">
   <div class="show-content">
     <div class="show-content-left">
       <div class="show-title-info">
@@ -94,4 +95,33 @@
           <% end %>
     </div>
   </div>
+    <div class="chart-container" style="display: flex; justify-content: space-between; padding: 0 15px;">
+      <div class="chart-container" style="height:35vh; width:45vw">
+        <canvas id="myBarChart" data-avg-current-first ="<%= @property.postcode.avg_current_first.gsub(/[\[\"\]]/, '') %>"></canvas>
+      </div>
+      <div class="chart-container" style="height:35vh; width:45vw">
+        <canvas id="myBarCharts" data-avg-price-foot ="<%= @property.postcode.avg_price_foot.gsub(/[\[\"\]]/, '') %>"></canvas>
+      </div>
+    </div>
+    <div class="chart-container" style="display: flex; justify-content: space-between; margin-top: 40px; padding: 0 15px;">
+    <div class="chart-container"  style="height:35vh; width:45vw">
+      <canvas id="myChart" data-crime-rate="<%= @property.postcode.crime_rating %>"></canvas>
+    </div>
+  <br />
+  <br />
+  <br />
+  <br />
+    <div class="chart-container" style="height:35vh; width:45vw">
+      <canvas id="lineGraph" data-avg-paid ="<%= @property.postcode.avg_paid.first.gsub(/[\[\"\]]/, '') %>"</canvas>
+    </div>
+  </div>
 </div>
+</div>
+
+
+
+
+</div>
+<%= content_for(:after_js) do %>
+<%= javascript_pack_tag 'chart' %>
+<% end %>

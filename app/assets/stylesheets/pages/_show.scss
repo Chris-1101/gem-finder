@@ -8,9 +8,19 @@
   display: flex;
 }
 
+.show-content-and-chart {
+  width: 90vw;
+  margin-left: 5vw;
+  position: relative;
+  top: -120px;
+  background-color: white;
+  border-radius: 3px;
+  height: 1200px;
+}
+
 .show-content-left {
-  width: 66vw;
-  height: 800px;
+  width: 61vw;
+  height: 600px;
 }
 
 .show-content-right {
@@ -18,7 +28,7 @@
   justify-content: space-around;
   flex-direction: column;
   height: 500px;
-  width: 34vw;
+  width: 38vw;
 
 }
 
