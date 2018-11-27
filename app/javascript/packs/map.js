@@ -31,6 +31,7 @@ if (mapElement) { // only build a map if there's a div#map to inject into
     map.fitBounds(bounds, { duration: 0, padding: 75 })
   }
 
+
   // map.setZoom(7);
   // map.setCenter([-0.12, 51.49]);
 }
@@ -43,5 +44,3 @@ if (addressInput) {
     container: addressInput
   });
 }
-
-

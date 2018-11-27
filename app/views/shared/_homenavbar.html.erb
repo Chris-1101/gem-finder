@@ -1,4 +1,4 @@
-<div class="navbar-wagon">
+<div class="navbar-wagon-home">
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
     <%= image_tag "logo.png", height: 50 %>
@@ -11,7 +11,7 @@
 
       <%= link_to "Messages", conversations_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "About Us", about_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "Properties", properties_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Properties Listing", properties_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <% if params["controller"] == "properties" && params["action"] == "index" %>
         <a href="" class="navbar-wagon-item navbar-wagon-link" data-toggle="modal" data-target="#modalproperty">Create Listing</a>
       <% end %>

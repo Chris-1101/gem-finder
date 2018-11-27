@@ -3,18 +3,20 @@
       <div class="container">
     <div class="">
     <%= form_tag properties_path, class: "filters", method: :get do %>
-    <p><i class="fas fa-home"></i><%= text_field_tag :location, params[:location], class: "form-control", placeholder: "Location" %></p>
-    <p><i class="fas fa-bed"></i><%= number_field_tag :bedrooms, params[:bedrooms], class: "form-control", placeholder: "Bedrooms", min: 0, max: @max_bedrooms %></p>
-    <p><i class="fas fa-hand-holding-usd"></i><%= number_field_tag :price, params[:price], class: "form-control", placeholder: "Max Price" %></p>
+      <p><i class="fas fa-home"></i><%= text_field_tag :location, params[:location], class: "form-control", placeholder: "Location" %></p>
+      <p><i class="fas fa-bed"></i><%= number_field_tag :bedrooms, params[:bedrooms], class: "form-control", placeholder: "Bedrooms", min: 0, max: @max_bedrooms %></p>
+      <p><i class="fas fa-hand-holding-usd"></i><%= number_field_tag :price, params[:price], class: "form-control", placeholder: "Max Price" %></p>
      <button class="btn btn-primary form-control" style="border-radius: 3px">Submit</button>
+     <% end %>
     </div>
-      <% end %>
-
-        <div class="row">
-          <% @properties.sample(30).each do |property| %>
+     
+      <div class="row">
+        <% if @properties.empty? %>
+          <h3>No results match <%= params[:location] %></h1>
+        <% end %>
+        <% @properties.sample(30).each do |property| %>
           <% next if property.price.nil? %>
           <% next if property.photo_url.include?('noimage') %>
-
           <% # All this should probably happen somewhere else %>
           <% address_parts = property.address.split(',') %>
           <% url = "http://api.postcodes.io/outcodes/#{property.postcode.outcode}" %>
