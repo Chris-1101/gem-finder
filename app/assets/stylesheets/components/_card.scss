@@ -1,5 +1,13 @@
 #properties-index {
-  margin: 20px 30px;
+  // margin: 20px 30px;
+  margin: 0;
+
+  #map-background {
+    position: fixed;
+    top: 111px;
+    width: calc(100vw - (100vw - 100%));
+    height: calc(100vh - 111px);
+  }
 
   #map {
     position: sticky;
@@ -8,16 +16,32 @@
     height: calc(100vh - 180px);
     margin-left: 30px;
     margin-top: 20px;
-    border: 1px solid $colour-dark;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    // border: 1px solid $colour-dark;
+    // box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
   }
+
 
   .container {
     // width: auto;
     margin: 0 0 20px 0;
     padding-left: 0;
     padding-right: 0;
+    .filters {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      p, button {
+        flex: 0 0 25%;
+        font-size: 20px;
+        margin-bottom: 0;
+      }
+      button {
+        font-weight: bold;
+      }
+    }
   }
+
+
 
   .row {
     display: flex;
@@ -33,7 +57,11 @@
 }
 
 .properties-wrapper {
+  position: absolute;
   display: flex;
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 60%;
 }
 
 .property-card {
@@ -42,7 +70,7 @@
   background: white;
   border: 1px solid $colour-dark;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-  margin: 20px;
+  margin: 10px;
 
   h3 {
     margin-top: 0;
@@ -122,6 +150,15 @@
   }
 }
 
+.james {
+  display: flex !important;
+  justify-content: space-between !important;
+  h3 {
+    text-align: center;
+    margin: 5px;
+  }
+}
+
 .property-card-link {
   position: absolute;
   top: 0;
@@ -147,15 +184,21 @@
   z-index: 3;
   background: transparent;
 }
+.fonts-awesome {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
 
 .showcard {
-  height: 300px;
-  width: 1100px;
+  height: 500px;
+  width: 1400px;
   padding: 50px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   margin-top: 20px;
+  margin-left: 700px;
   border-radius:3px;
   border: 1px solid;
   box-shadow: 0.4px 0.4px;
@@ -180,6 +223,11 @@
 .headingdashboard{
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+}
+
+.property-price-show {
+  display: flex;
+  justify-content: space-between;
 }
 
 .buttonproperties{

@@ -1,22 +1,101 @@
-<div class="container">
-  <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'Property Info')">Property Info</button>
-    <button class="tablinks" onclick="openCity(event, 'Average Value')">Average Value</button>
-    <button class="tablinks" onclick="openCity(event, 'Crime Rates')">Crime Rates</button>
-    <button class="tablinks" onclick="openCity(event, 'Average Price Paid')">Average Price Paid</button>
+<div class="show-container">
+  <div class="show-banner">
+    <div id="map" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY']%>"></div>
   </div>
+  <div class="show-content-and-chart">
+  <div class="show-content">
+    <div class="show-content-left">
+      <div class="show-title-info">
+        <div class="show-title-info-text">
+          <h5 class="show-title-info-text-title"><%= @property.address.split(',')[-1].upcase %></h5>
+          <h2 class="show-title-info-text-road">Kingsland Road</h2>
+        </div>
+        <div class="show-title-info-price">
+          <h5>275,000</h5>
+        </div>
+      </div>
+      <div class="show-details-prices">
+        <h5>Other Prices in the area</h5>
+        <div class="show-details-prices-container">
+          <div class="show-details-prices-box">
+            <h5 class="show-details-prices-box-title">Detached</h5>
+            <h4 class="show-details-prices-box-price">260,000</h4>
+          </div>
+          <div class="show-details-prices-box">
+            <h5 class="show-details-prices-box-title">Detached</h5>
+            <h4 class="show-details-prices-box-price">260,000</h4>
+          </div>
+          <div class="show-details-prices-box">
+            <h5 class="show-details-prices-box-title">Detached</h5>
+            <h4 class="show-details-prices-box-price">260,000</h4>
+          </div>
+          <div class="show-details-prices-box">
+            <h5 class="show-details-prices-box-title">Detached</h5>
+            <h4 class="show-details-prices-box-price">260,000</h4>
+          </div>
+        </div>
 
-  <div id="Crime Rates" class="container tabcontent">
-    <div class="chart-container">
-      <canvas id="myChart" data-crime-rate="<%= @property.postcode.crime_rating %>"></canvas>
+      </div>
+      <div class="show-description">
+        <h5><%= @property.description  %></h5>
+
+      </div>
+      <div class="show-statistics">
+        <h5 class="show-statistics-title">Statistics for this property</h5>
+        <div class="show-statistics-container">
+            <% if @property_rating < 3 %>
+              <% property_rating_color = '#E8322D' %>
+            <% elsif @property_rating > 3 %>
+              <% property_rating_color = '#00ADB5' %>
+            <% else %>
+              <% property_rating_color = '#F8B500' %>
+            <% end %>
+
+            <% if @national_crime < 3 %>
+              <% crime_rating_color = '#F8B500' %>
+            <% elsif @national_crime > 3 %>
+              <% crime_rating_color = '#E8322D' %>
+            <% else %>
+              <% crime_rating_color = '#00ADB5' %>
+            <% end %>
+
+            <% if @opportunity_rating < 3 %>
+              <% opportunity_rating_color = '#E8322D' %>
+            <% elsif @opportunity_rating > 3 %>
+              <% opportunity_rating_color = '#00ADB5' %>
+            <% else %>
+              <% opportunity_rating_color = '#F8B500' %>
+            <% end %>
+          <div class="show-statistics-box">
+            <h5 class="show-statistics-box-title" style="background-color: <%= crime_rating_color %>">CRIME</h5>
+            <h3 class="show-statistics-box-rating"><%= @national_crime %>  / 5</h3>
+          </div>
+          <div class="show-statistics-box">
+            <h5 class="show-statistics-box-title" style="background-color: <%= opportunity_rating_color %>">OPPORTUNITY</h5>
+            <h3 class="show-statistics-box-rating"><%= @opportunity_rating %> / 5</h3>
+          </div>
+          <div class="show-statistics-box">
+            <h5 class="show-statistics-box-title" style="background-color: <%= property_rating_color %>">PRICE</h5>
+            <h3 class="show-statistics-box-rating"><%= @property_rating %> / 5</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="show-content-right">
+      <%= link_to "Track Property", trackings_path(tracking: {property_id: @property,user_id: current_user}), method: :post, class: "btn btn-gemfinder" %>
+      <% if @property.photo? %>
+        <div class="show-card-right" style="background-image: url('<%= cl_image_path @property.photo, height: 300, width: 400 %>');background-size: cover;">
+        </div>
+        <div class="propery-show-text" >
+          <div class="property-price-link">
+          </div>
+        </div>
+        <% else %>
+        <div class="show-card-right" style="background-image: url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cdc84c9290e90088f8ab78270ee1ffdf&auto=format&fit=crop&w=500&q=60');">
+          <% end %>
     </div>
   </div>
-
-  <br />
-  <br />
-
-  <div id="Average Value" class="container tabcontent">
-    <div style="display: flex; justify-content: space-between;">
+    <div class="chart-container" style="display: flex; justify-content: space-between; padding: 0 15px;">
       <div class="chart-container" style="height:35vh; width:45vw">
         <canvas id="myBarChart" data-avg-current-first ="<%= @property.postcode.avg_current_first.gsub(/[\[\"\]]/, '') %>"></canvas>
       </div>
@@ -24,100 +103,25 @@
         <canvas id="myBarCharts" data-avg-price-foot ="<%= @property.postcode.avg_price_foot.gsub(/[\[\"\]]/, '') %>"></canvas>
       </div>
     </div>
-  </div>
-
-  <div id="Average Price Paid" class="container tabcontent">
-    <div class="chart-container" height:40vh; width:80vw">
+    <div class="chart-container" style="display: flex; justify-content: space-between; margin-top: 40px; padding: 0 15px;">
+    <div class="chart-container"  style="height:35vh; width:45vw">
+      <canvas id="myChart" data-crime-rate="<%= @property.postcode.crime_rating %>"></canvas>
+    </div>
+  <br />
+  <br />
+  <br />
+  <br />
+    <div class="chart-container" style="height:35vh; width:45vw">
       <canvas id="lineGraph" data-avg-paid ="<%= @property.postcode.avg_paid.first.gsub(/[\[\"\]]/, '') %>"</canvas>
     </div>
   </div>
-
-  <% if @property_rating < 3 %>
-    <% property_rating_color = 'red' %>
-  <% elsif @property_rating > 3 %>
-    <% property_rating_color = 'green' %>
-  <% else %>
-    <% property_rating_color = 'yellow' %>
-  <% end %>
-
-  <% if @national_crime < 3 %>
-    <% crime_rating_color = 'red' %>
-  <% elsif @national_crime > 3 %>
-    <% crime_rating_color = 'green' %>
-  <% else %>
-    <% crime_rating_color = 'yellow' %>
-  <% end %>
-
-  <% if @opportunity_rating < 3 %>
-    <% opportunity_rating_color = 'red' %>
-  <% elsif @opportunity_rating > 3 %>
-    <% opportunity_rating_color = 'green' %>
-  <% else %>
-    <% opportunity_rating_color = 'yellow' %>
-  <% end %>
-
-<div class="ratings-container">
-  <div>
-    <div class="ratings" style="background-color: <%= crime_rating_color %>">
-      <h1>Crime</h1>
-    </div>
-    <h3><%= @national_crime %>  / 5</h3>
-  </div>
-  <div>
-    <div class="ratings" style="background-color: <%= opportunity_rating_color %>">
-      <h1>Opportunity</h1>
-    </div>
-    <h3><%= @opportunity_rating %> / 5</h3>
-  </div>
-  <div>
-    <div class="ratings" style="background-color: <%= property_rating_color %>">
-      <h1>Property</h1>
-    </div>
-    <h3><%= @property_rating %> / 5</h3>
-  </div>
+</div>
 </div>
 
-  <div id="Property Info" class="tabcontent" style="display: block">
-    <div class="row">
-      <div class="container tabcontent property_info">
-        <% if @property.photo? %>
-        <div class="showcard" style="background-image: url('<%= cl_image_path @property.photo, height: 300, width: 400 %>');background-size: cover;">
-        </div>
-        <div class="propery-show-text" >
-          <h5><%= @property.address  %></h5>
-          <h5><%= @property.description  %></h5>
-          <div class="property-price-link">
-            <h5><strong><%= @property.price  %></strong></h5>
-            <%= link_to "Track Property", trackings_path(tracking: {property_id: @property,user_id: current_user}), method: :post, class: "btn btn-danger" %>
-          </div>
-        </div>
-        <% else %>
-        <div class="showcard" style="background-image: url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cdc84c9290e90088f8ab78270ee1ffdf&auto=format&fit=crop&w=500&q=60');">
-          <% end %>
-        </div>
-      </div>
 
-      </div>
-    </div>
-  </div>
+
+
 </div>
-
-<script>
-  function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-  }
-</script>
-
 <%= content_for(:after_js) do %>
 <%= javascript_pack_tag 'chart' %>
 <% end %>
