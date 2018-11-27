@@ -2,13 +2,17 @@
   <div class="wrap">
     <div class="search">
       <!-- <input type="text"> -->
+      <div class="center-text">
         <h2 class="homepage-title">Gemfinder</h2>
+      <h1 class="interpol">Welcome Back, <%= current_user.name %></h1>
       <p class="tagline-text">Find undervalued property in London</p>
       <div>
         <%= form_tag properties_path, method: :get do |f| %>
         <div class="search-button">
         <input type="text" name="location" id="property_address" class="searchTerm" placeholder="Enter a location..." />
         <input type="submit" class="submit-button" />
+
+      </div>
         <!-- <%= link_to properties_path, class: "searchButton" do  %>
           <i class="fa fa-search"></i>
           <% end %> -->
