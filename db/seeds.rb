@@ -74,13 +74,16 @@ def scrape_zoopla(location)
     name = element.search('.listing-results-attr a').text
     address = element.search('.listing-results-address').text
     # postcode = address.split(',')[-1].split(' ')[-1]
+    bedrooms = element.search('.num-beds').text.to_i
+    bathrooms = element.search('.num-baths').text.to_i
+    cars = element.search('.num-reception').text.to_i
     photo = element.search('.photo-hover img').attr('src').value
     description = element.search('.listing-results-attr + p').text
-    price = element.search('.listing-results-price').text
+    price = element.search('.listing-results-price').text.strip.gsub('£', '').gsub(',', '').to_i
 
     next if photo.include?('noimage')
 
-    property = Property.new(name: name, address: address, price: price, description: description)
+    property = Property.new(name: name, address: address, price: price, description: description, bedrooms: bedrooms, bathrooms: bathrooms, cars: cars)
     property.remote_photo_url = photo
     properties << property
   end
