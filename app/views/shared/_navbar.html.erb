@@ -15,7 +15,7 @@
       <% if params["controller"] == "properties" && params["action"] == "index" %>
         <a href="" class="navbar-wagon-item navbar-wagon-link" data-toggle="modal" data-target="#modalproperty">Create Listing</a>
       <% end %>
-      <%= link_to "Contact Us", contact_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "How it works", contact_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
@@ -29,7 +29,7 @@
             </li>
             <li>
               <%= link_to "#" do %>
-                <i class="fa fa-cog"></i>  <%= t(".settings", default: "Settings") %>
+                <i class="fa fa-cog"></i>  <%= t(".contactus", default: "Contact Us") %>
               <% end %>
             </li>
             <li>
