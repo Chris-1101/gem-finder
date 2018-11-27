@@ -115,7 +115,8 @@ class PropertiesController < ApplicationController
     # @crime_rates = []
     # @postcodes = postcodes.sample(10)
     # @postcodes.each { |postcode| @crime_rates << scrape_crime(postcode).gsub(/All Crime & ASB/, '') }
-    # @property_details = zoopla_details(postcodes.sample)
+    @property_details = zoopla_details(@property.postcode.outcode + @property.postcode.incode)
+    @avg_prices = @property_details[:avg_current_first_column]
     # @hometrack_details = hometrack_details
   end
 
