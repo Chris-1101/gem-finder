@@ -92,15 +92,19 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .button1{
   background-color: #00ADB5;
   color: white;
   margin-top: 20px;
   margin-bottom: 20px;
-&:hover{
-  color: white;
-  opacity: 0.9
-}
+  &:hover{
+    color: white;
+    opacity: 0.9
+  }
 }
 
 .form-control-label{
