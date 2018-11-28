@@ -1,8 +1,11 @@
 // Add this if we want a background image to our log in page
 .border-form-wrapper {
-    background-image: linear-gradient(-225deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.6) 50%), url('https://images.unsplash.com/photo-1522735555435-a8fe18da2089?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f0bdee14b2ddec019e426a25c3b96efd&auto=format&fit=crop&w=1800&h=600&q=60');
-    padding: 20px 0 1px 0;
-
+  background-image: linear-gradient(-225deg,
+    rgba(255,255,255,0.3) 0%,
+    rgba(255,255,255,0.6) 50%),
+    url('https://images.pexels.com/photos/259962/pexels-photo-259962.jpeg?auto=compress&cs=tinysrgb&w=1800&h=850');
+  background-size: cover;
+  padding: 20px 0 1px 0;
 }
 
 
