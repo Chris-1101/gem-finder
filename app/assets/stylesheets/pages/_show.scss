@@ -6,6 +6,25 @@
   // background-color: rebeccapurple;
 }
 
+.show-title-info-price {
+  margin-top: 12px;
+}
+
+.round-inline-block {
+  display: inline-block;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+
+  &+ span {
+    font-size: 15px;
+
+    &+ h5 {
+      margin: 0;
+    }
+  }
+}
+
 .show-map {
   position: absolute;
   width: 100vw;

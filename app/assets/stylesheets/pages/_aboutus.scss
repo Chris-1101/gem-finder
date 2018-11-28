@@ -21,10 +21,10 @@ $L:     1000px;
   @include box-sizing(border-box);
 }
 
-body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1rem;
-}
+// body {
+//   font-family: 'Open Sans', sans-serif;
+//   font-size: 1rem;
+// }
 
 .about-us {
   margin: 4em auto;
@@ -130,5 +130,3 @@ body {
 .right-text {
     width: 50%;
 }
-
-
