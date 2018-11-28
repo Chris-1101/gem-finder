@@ -4,64 +4,65 @@
   </div>
   <div class="properties-wrapper">
       <div class="container">
-    <div class="">
-    <%= form_tag properties_path, class: "filters", method: :get do %>
-      <p><i class="fas fa-home"></i><%= text_field_tag :location, params[:location], class: "form-control", placeholder: "Location" %></p>
-      <p><i class="fas fa-bed"></i><%= number_field_tag :bedrooms, params[:bedrooms], class: "form-control", placeholder: "Bedrooms", min: 0, max: @max_bedrooms %></p>
-      <p><i class="fas fa-hand-holding-usd"></i><%= number_field_tag :price, params[:price], class: "form-control", placeholder: "Max Price" %></p>
-     <button class="btn btn-primary form-control" style="border-radius: 3px">Submit</button>
-     <% end %>
-    </div>
-     
-      <div class="row">
-        <% if @properties.empty? %>
-          <h3>No results match <%= params[:location] %></h1>
-        <% end %>
-        <% @properties.sample(30).each do |property| %>
-          <% next if property.price.nil? %>
-          <% next if property.photo_url.include?('noimage') %>
-          <% # All this should probably happen somewhere else %>
-          <% address_parts = property.address.split(',') %>
-          <% url = "http://api.postcodes.io/outcodes/#{property.postcode.outcode}" %>
-          <% response = JSON.parse(open(url).read) %>
-          <% area = response["result"]["admin_ward"][0] %>
-
-          <div class="col-xs-12 col-md-6 col-lg-6 inner-padded">
-            <div class="property-card">
-              <div class="property-card-header">
-                <p><%= address_parts[-1] %></p>
-                <h3><%= area %></h3>
-              </div>
-              <div class="property-card-thumbnail" style="background-image: url(<%= cl_image_path property.photo %>)"></div>
-              <div class="property-card-content">
-                <div class="james">
-                  <div class="fonts-awesome">
-                    <p><i class="fas fa-bed"></i>  <%= property.bedrooms %></p>
-                    <p><i class="fas fa-bath"></i> <%= property.bathrooms %></p>
-                    <p><i class="fas fa-car"></i>  <%= property.cars %></p>
-                  </div>
-                  <h3><%= address_parts[0] %></h3>
-                  <h6>£<%= property.price %></h6>
-                </div>
-                <p>
-                  <% content_max_len = 170 %>
-                  <% description = property.description.first(content_max_len) %>
-                  <% description += " [...]" if property.description.length > content_max_len %>
-                  <%= description %>
-                </p>
-              </div>
-              <div class="property-card-footer">
-                <a>More Info</a>
-                <a>Track</a>
-              </div>
-              <%= link_to "", property_path(property), class: "property-card-link" %>
-              <%= link_to "", trackings_path(tracking: {user_id: current_user.id, property_id: property.id }), method: :post, class: "property-card-track"  %>
-            </div>
-          </div>
+        <!-- Filters -->
+        <div>
+          <%= form_tag properties_path, class: "filters", method: :get do %>
+          <p><i class="fas fa-home"></i><%= text_field_tag :location, params[:location], class: "form-control", placeholder: "Location" %></p>
+          <p><i class="fas fa-bed"></i><%= number_field_tag :bedrooms, params[:bedrooms], class: "form-control", placeholder: "Bedrooms", min: 0, max: @max_bedrooms %></p>
+          <p><i class="fas fa-hand-holding-usd"></i><%= number_field_tag :price, params[:price], class: "form-control", placeholder: "Max Price" %></p>
+          <button class="btn btn-gemfinder form-control" style="border-radius: 3px">Submit</button>
           <% end %>
         </div>
-      </div>
-      <div id="map" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY']%>"></div>
+        <div class="row">
+          <!-- Results -->
+          <% if @properties.empty? %>
+            <h3>No results match <%= params[:location] %></h1>
+          <% end %>
+          <% @properties.sample(30).each do |property| %>
+            <% next if property.price.nil? %>
+            <% next if property.photo_url.include?('noimage') %>
+            <% # All this should probably happen somewhere else %>
+            <% address_parts = property.address.split(',') %>
+            <% url = "http://api.postcodes.io/outcodes/#{property.postcode.outcode}" %>
+            <% response = JSON.parse(open(url).read) %>
+            <% area = response["result"]["admin_ward"][0] %>
+
+            <div class="col-xs-12 col-md-6 col-lg-6 inner-padded">
+              <div class="property-card">
+                <div class="property-card-header">
+                  <p><%= address_parts[-1] %></p>
+                  <h3><%= area %></h3>
+                </div>
+                <div class="property-card-thumbnail" style="background-image: url(<%= cl_image_path property.photo %>)"></div>
+                <div class="property-card-content">
+                  <!-- Icons -->
+                  <div>
+                    <!-- <div class="fonts-awesome">
+                      <p><i class="fas fa-bed"></i>  <%= property.bedrooms %></p>
+                      <p><i class="fas fa-bath"></i> <%= property.bathrooms %></p>
+                      <p><i class="fas fa-car"></i>  <%= property.cars %></p>
+                    </div> -->
+                    <h3><%= address_parts[0] %></h3>
+                    <h6>£<%= property.price.split(' ')[0] %></h6>
+                  </div>
+                  <p>
+                    <% content_max_len = 170 %>
+                    <% description = property.description.first(content_max_len) %>
+                    <% description += " [...]" if property.description.length > content_max_len %>
+                    <%= description %>
+                  </p>
+                </div>
+                <div class="property-card-footer">
+                  <a>More Info</a>
+                  <a>Track</a>
+                </div>
+                <%= link_to "", property_path(property), class: "property-card-link" %>
+                <%= link_to "", trackings_path(tracking: {user_id: current_user.id, property_id: property.id }), method: :post, class: "property-card-track"  %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      <!-- <div id="map"></div> -->
     </div>
-    <!-- <div id="map"></div> -->
   </div>

@@ -31,6 +31,20 @@ const mapElementShow = document.getElementById('map-background-show');
 
    const markersShow = JSON.parse(mapElementShow.dataset.markers);
 
+
+  // if (markers.length === 0) {
+  //   map.setZoom(1);
+  // } else if (markers.length === 1) {
+  //   map.setZoom(14);
+  //   map.setCenter([markers[0].lng, markers[0].lat]);
+  // } else {
+  //   const bounds = new mapboxgl.LngLatBounds();
+  //   markers.forEach((marker) => {
+  //     bounds.extend([marker.lng, marker.lat]);
+  //   });
+  //   map.fitBounds(bounds, { duration: 500, padding: 75 })
+  // }
+
     markersShow.forEach(function(marker) {
       new mapboxgl.Marker()
           .setLngLat([marker.lng, marker.lat])
