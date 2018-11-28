@@ -3,7 +3,7 @@ class ConversationsController < ApplicationController
   def index
     favourite_postcodes = current_user.trackings.map(&:property).map(&:postcode).uniq
     same_postcode_trackings = favourite_postcodes.map(&:properties).flatten.map(&:trackings).flatten.reject { |tracking| tracking.user == current_user }
-    @similar_users = same_postcode_trackings.map(&:user).uniq
+    @similar_users = same_postcode_trackings.map(&:user).uniq.reject { |user| Conversation.between(current_user.id, user.id).present? }
     # @users.map { |user| user.trackings.select { |tracking| c}
     @conversations = Conversation.where(sender: current_user).or(Conversation.where(recipient: current_user))
     if params[:selected_convo]
