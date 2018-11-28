@@ -17,6 +17,19 @@ if (mapElement) { // only build a map if there's a div#map to inject into
         .setLngLat([marker.lng, marker.lat])
         .addTo(map);
   });
+}
+
+
+const mapElementShow = document.getElementById('map-background-show');
+
+  if (mapElementShow) { // only build a map if there's a div#map to inject into
+    mapboxgl.accessToken = mapElementShow.dataset.mapboxApiKey; // API key from `.env`
+    const mapShow = new mapboxgl.Map({
+      container: 'map-background-show',
+      style: 'mapbox://styles/mapbox/streets-v10'
+    });
+
+   const markersShow = JSON.parse(mapElementShow.dataset.markers);
 
 
   // if (markers.length === 0) {
@@ -32,6 +45,25 @@ if (mapElement) { // only build a map if there's a div#map to inject into
   //   map.fitBounds(bounds, { duration: 500, padding: 75 })
   // }
 
+    markersShow.forEach(function(marker) {
+      new mapboxgl.Marker()
+          .setLngLat([marker.lng, marker.lat])
+          .addTo(mapShow);
+    });
+
+  if (markersShow.length === 0) {
+    mapShow.setZoom(1);
+  } else if (markersShow.length === 1) {
+    mapShow.setZoom(14);
+    mapShow.setCenter([markersShow[0].lng, markersShow[0].lat]);
+  } else {
+    const bounds = new mapboxgl.LngLatBounds();
+    markersShow.forEach((marker) => {
+      bounds.extend([marker.lng, marker.lat]);
+    });
+    mapShow.fitBounds(bounds, { duration: 500, padding: 75 })
+  }
+
   // map.flyTo({
   //   center: [-0.12, 51.49],
   //   offset: [300, 0],
@@ -39,8 +71,8 @@ if (mapElement) { // only build a map if there's a div#map to inject into
   //   curve: .6
   // });
 
-  map.setZoom(10.7);
-  map.setCenter([-0.3, 51.52]);
+  // map.setZoom(10.7);
+  // map.setCenter([-0.3, 51.52]);
 }
 
 const addressInput = document.getElementById('property_address');
