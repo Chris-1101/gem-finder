@@ -13,7 +13,7 @@
           <h2 class="show-title-info-text-road"><%= @property.address.split(',')[0] %></h2>
         </div>
         <div class="show-title-info-price">
-          <h5><%= @property.price.split(' ')[0] %></h5>
+          <h5>£<%= @property.price %></h5>
         </div>
       </div>
       <div class="show-details-prices">
@@ -45,32 +45,36 @@
       <div class="show-statistics">
         <h5 class="show-statistics-title">Statistics for this property</h5>
         <div class="show-statistics-container">
+            <% show_colour_red = '#E8322D' %>
+            <% show_colour_orange = '#F8B500' %>
+            <% show_colour_green = '#00ADB5' %>
+
             <% if @property_rating < 3 %>
-              <% property_rating_color = '#E8322D' %>
+              <% property_rating_color = show_colour_red %>
             <% elsif @property_rating > 3 %>
-              <% property_rating_color = '#00ADB5' %>
+              <% property_rating_color = show_colour_green %>
             <% else %>
-              <% property_rating_color = '#F8B500' %>
+              <% property_rating_color = show_colour_orange %>
             <% end %>
 
-            <% if @national_crime < 3 %>
-              <% crime_rating_color = '#F8B500' %>
-            <% elsif @national_crime > 3 %>
-              <% crime_rating_color = '#E8322D' %>
+            <% if @national_crime_integer < 3 %>
+              <% crime_rating_color = show_colour_red %>
+            <% elsif @national_crime_integer > 3 %>
+              <% crime_rating_color = show_colour_green %>
             <% else %>
-              <% crime_rating_color = '#00ADB5' %>
+              <% crime_rating_color = show_colour_orange %>
             <% end %>
 
             <% if @opportunity_rating < 3 %>
-              <% opportunity_rating_color = '#E8322D' %>
+              <% opportunity_rating_color = show_colour_red %>
             <% elsif @opportunity_rating > 3 %>
-              <% opportunity_rating_color = '#00ADB5' %>
+              <% opportunity_rating_color = show_colour_green %>
             <% else %>
-              <% opportunity_rating_color = '#F8B500' %>
+              <% opportunity_rating_color = show_colour_orange %>
             <% end %>
           <div class="show-statistics-box">
             <h5 class="show-statistics-box-title" style="background-color: <%= crime_rating_color %>">CRIME</h5>
-            <h3 class="show-statistics-box-rating"><%= @national_crime %>  / 5</h3>
+            <h3 class="show-statistics-box-rating"><%= @national_crime %></h3>
           </div>
           <div class="show-statistics-box">
             <h5 class="show-statistics-box-title" style="background-color: <%= opportunity_rating_color %>">OPPORTUNITY</h5>

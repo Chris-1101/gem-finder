@@ -83,18 +83,21 @@ class PropertiesController < ApplicationController
 
     national_crime = crime_rating.to_f / 57.8 * 100
 
-
-    @national_crime = 0
     if national_crime < 51
-      @national_crime = 5
+      @national_crime_integer = 5
+      @national_crime = "low"
     elsif national_crime < 86
-      @national_crime = 4
+      @national_crime_integer = 4
+      @national_crime = "low"
     elsif national_crime < 100
-      @national_crime = 3
+      @national_crime_integer = 3
+      @national_crime = "average"
     elsif national_crime < 130
-      @national_crime = 2
+      @national_crime_integer = 2
+      @national_crime = "high"
     else
-      @national_crime = 1
+      @national_crime_integer = 1
+      @national_crime = "high"
     end
 
     @property_rating = 0
@@ -110,7 +113,7 @@ class PropertiesController < ApplicationController
       @property_rating = 1
     end
 
-    @opportunity_rating = ((@property_rating + @national_crime).to_f / 2).ceil
+    @opportunity_rating = ((@property_rating + @national_crime_integer).to_f / 2).ceil
 
 
     # @crime_rates = []
