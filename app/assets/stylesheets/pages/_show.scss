@@ -1,7 +1,9 @@
 .show-banner {
   width: 100vw;
   height: 300px;
-  background-color: rebeccapurple;
+  z-index: 1;
+
+  // background-color: rebeccapurple;
 }
 
 .show-map {
@@ -22,6 +24,7 @@
   background-color: white;
   border-radius: 3px;
   height: 1200px;
+  z-index: 999999999;
 }
 
 .show-content-left {

@@ -74,11 +74,12 @@ class PropertiesController < ApplicationController
               'BT119BS','BT118LU','BT118QU','BT274HF','BT440JB','AB101AF','AB510AG','N101AG','N31AJ','SA20AH']
 
     @property = Property.find(params[:id])
+    @markers = [{lng: @property.longitude, lat: @property.latitude}]
 
     crime_rating = @property.postcode.crime_rating
     avg_area = JSON.parse(@property.postcode.avg_area).gsub(/[,.]/, '').to_i
 
-    property_value = ( (@property.price.gsub(/\s+/, "")[1..-1].gsub(",", "").to_f)) / avg_area * 100
+    property_value = ( (@property.price.to_f)) / avg_area * 100
 
     national_crime = crime_rating.to_f / 57.8 * 100
 
