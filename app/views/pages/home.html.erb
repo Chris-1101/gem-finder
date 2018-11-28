@@ -4,7 +4,9 @@
       <!-- <input type="text"> -->
       <div class="center-text">
         <h2 class="homepage-title">Gemfinder</h2>
+        <% if user_signed_in? %>
       <h1 class="interpol">Welcome Back, <%= current_user.name %></h1>
+      <% end %>
       <p class="tagline-text">Find undervalued property in London</p>
       <div>
         <%= form_tag properties_path, method: :get do |f| %>
