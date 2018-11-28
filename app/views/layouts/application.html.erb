@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><%= meta_title %></title>
     <meta name="description" content="<%= meta_description %>">
-    
+
     <!-- Favourite Icon -->
     <%= favicon_link_tag 'favicon-32x32.png' %>
 
@@ -42,9 +42,9 @@
     <%= render 'shared/user_modals' if params["controller"] == "properties" && params["action"] == "index" %>
 
     <%= yield %>
-
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag "map" %>
     <%= yield(:after_js) %>
   </body>
 </html>
