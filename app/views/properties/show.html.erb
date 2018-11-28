@@ -8,10 +8,10 @@
       <div class="show-title-info">
         <div class="show-title-info-text">
           <h5 class="show-title-info-text-title"><%= @property.address.split(',')[-1].upcase %></h5>
-          <h2 class="show-title-info-text-road">Kingsland Road</h2>
+          <h2 class="show-title-info-text-road"><%= @property.address.split(',')[0] %></h2>
         </div>
         <div class="show-title-info-price">
-          <h5><%= @property.price %></h5>
+          <h5><%= @property.price.split(' ')[0] %></h5>
         </div>
       </div>
       <div class="show-details-prices">
