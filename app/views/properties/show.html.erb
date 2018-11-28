@@ -1,3 +1,31 @@
+<% show_colour_red = '#E8322D' %>
+<% show_colour_orange = '#F8B500' %>
+<% show_colour_green = '#00ADB5' %>
+
+<% if @property_rating < 3 %>
+<% property_rating_color = show_colour_red %>
+<% elsif @property_rating > 3 %>
+<% property_rating_color = show_colour_green %>
+<% else %>
+<% property_rating_color = show_colour_orange %>
+<% end %>
+
+<% if @national_crime_integer < 3 %>
+<% crime_rating_color = show_colour_red %>
+<% elsif @national_crime_integer > 3 %>
+<% crime_rating_color = show_colour_green %>
+<% else %>
+<% crime_rating_color = show_colour_orange %>
+<% end %>
+
+<% if @opportunity_rating < 3 %>
+<% opportunity_rating_color = show_colour_red %>
+<% elsif @opportunity_rating > 3 %>
+<% opportunity_rating_color = show_colour_green %>
+<% else %>
+<% opportunity_rating_color = show_colour_orange %>
+<% end %>
+
 <div class="show-container">
   <div class="show-banner">
     <div id="map-background-show" style="height:100%;" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY']%>">
@@ -5,123 +33,98 @@
     </div>
   </div>
   <div class="show-content-and-chart">
-  <div class="show-content">
-    <div class="show-content-left">
-      <div class="show-title-info">
-        <div class="show-title-info-text">
-          <h5 class="show-title-info-text-title"><%= @property.address.split(',')[-1].upcase %></h5>
-          <h2 class="show-title-info-text-road"><%= @property.address.split(',')[0] %></h2>
+    <div class="show-content">
+      <div class="show-content-left">
+        <div class="show-title-info">
+          <div class="show-title-info-text">
+            <h5 class="show-title-info-text-title"><%= @property.address.split(',')[-1].upcase %></h5>
+            <h2 class="show-title-info-text-road"><%= @property.address.split(',')[0] %></h2>
+          </div>
+          <div class="show-title-info-price">
+            <div class="round-inline-block" style="background: <%= opportunity_rating_color %>;"></div>
+            <span>for sale</span>
+            <h5>£<%= number_with_delimiter(@property.price, delimiter: ',') %></h5>
+          </div>
         </div>
-        <div class="show-title-info-price">
-          <h5>£<%= number_with_delimiter(@property.price, delimiter: ',') %></h5>
+        <div class="show-details-prices">
+          <h5>Other Prices in the area</h5>
+          <div class="show-details-prices-container">
+            <div class="show-details-prices-box">
+              <h5 class="show-details-prices-box-title">Detached</h5>
+              <h4 class="show-details-prices-box-price"><%= @avg_prices[0] %></h4>
+            </div>
+            <div class="show-details-prices-box">
+              <h5 class="show-details-prices-box-title">Semi-detached</h5>
+              <h4 class="show-details-prices-box-price"><%= @avg_prices[1] %></h4>
+            </div>
+            <div class="show-details-prices-box">
+              <h5 class="show-details-prices-box-title">Terraced</h5>
+              <h4 class="show-details-prices-box-price"><%= @avg_prices[2] %></h4>
+            </div>
+            <div class="show-details-prices-box">
+              <h5 class="show-details-prices-box-title">Flats</h5>
+              <h4 class="show-details-prices-box-price"><%= @avg_prices[3] %></h4>
+            </div>
+          </div>
+
+        </div>
+        <div class="show-description">
+          <h5><%= @property.description  %></h5>
+
+        </div>
+        <div class="show-statistics">
+          <h5 class="show-statistics-title">Statistics for this property</h5>
+          <div class="show-statistics-container">
+            <div class="show-statistics-box">
+              <h5 class="show-statistics-box-title" style="background-color: <%= crime_rating_color %>">CRIME</h5>
+              <h3 class="show-statistics-box-rating"><%= @national_crime %></h3>
+            </div>
+            <div class="show-statistics-box">
+              <h5 class="show-statistics-box-title" style="background-color: <%= opportunity_rating_color %>">OPPORTUNITY</h5>
+              <h3 class="show-statistics-box-rating"><%= @opportunity_rating %> / 5</h3>
+            </div>
+            <div class="show-statistics-box">
+              <h5 class="show-statistics-box-title" style="background-color: <%= property_rating_color %>">PRICE</h5>
+              <h3 class="show-statistics-box-rating"><%= @property_rating %> / 5</h3>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="show-details-prices">
-        <h5>Other Prices in the area</h5>
-        <div class="show-details-prices-container">
-          <div class="show-details-prices-box">
-            <h5 class="show-details-prices-box-title">Detached</h5>
-            <h4 class="show-details-prices-box-price"><%= @avg_prices[0] %></h4>
+      <div class="show-content-right">
+        <%= link_to "Track Property", trackings_path(tracking: {property_id: @property,user_id: current_user}), method: :post, class: "btn btn-gemfinder" %>
+        <% if @property.photo? %>
+          <div class="show-card-right" style="background-image: url('<%= cl_image_path @property.photo, height: 300, width: 400 %>');background-size: cover;">
           </div>
-          <div class="show-details-prices-box">
-            <h5 class="show-details-prices-box-title">Semi-detached</h5>
-            <h4 class="show-details-prices-box-price"><%= @avg_prices[1] %></h4>
+          <div class="propery-show-text" >
+            <div class="property-price-link">
+            </div>
           </div>
-          <div class="show-details-prices-box">
-            <h5 class="show-details-prices-box-title">Terraced</h5>
-            <h4 class="show-details-prices-box-price"><%= @avg_prices[2] %></h4>
-          </div>
-          <div class="show-details-prices-box">
-            <h5 class="show-details-prices-box-title">Flats</h5>
-            <h4 class="show-details-prices-box-price"><%= @avg_prices[3] %></h4>
-          </div>
-        </div>
-
-      </div>
-      <div class="show-description">
-        <h5><%= @property.description  %></h5>
-
-      </div>
-      <div class="show-statistics">
-        <h5 class="show-statistics-title">Statistics for this property</h5>
-        <div class="show-statistics-container">
-            <% show_colour_red = '#E8322D' %>
-            <% show_colour_orange = '#F8B500' %>
-            <% show_colour_green = '#00ADB5' %>
-
-            <% if @property_rating < 3 %>
-              <% property_rating_color = show_colour_red %>
-            <% elsif @property_rating > 3 %>
-              <% property_rating_color = show_colour_green %>
-            <% else %>
-              <% property_rating_color = show_colour_orange %>
+          <% else %>
+          <div class="show-card-right" style="background-image: url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cdc84c9290e90088f8ab78270ee1ffdf&auto=format&fit=crop&w=500&q=60');">
             <% end %>
-
-            <% if @national_crime_integer < 3 %>
-              <% crime_rating_color = show_colour_red %>
-            <% elsif @national_crime_integer > 3 %>
-              <% crime_rating_color = show_colour_green %>
-            <% else %>
-              <% crime_rating_color = show_colour_orange %>
-            <% end %>
-
-            <% if @opportunity_rating < 3 %>
-              <% opportunity_rating_color = show_colour_red %>
-            <% elsif @opportunity_rating > 3 %>
-              <% opportunity_rating_color = show_colour_green %>
-            <% else %>
-              <% opportunity_rating_color = show_colour_orange %>
-            <% end %>
-          <div class="show-statistics-box">
-            <h5 class="show-statistics-box-title" style="background-color: <%= crime_rating_color %>">CRIME</h5>
-            <h3 class="show-statistics-box-rating"><%= @national_crime %></h3>
-          </div>
-          <div class="show-statistics-box">
-            <h5 class="show-statistics-box-title" style="background-color: <%= opportunity_rating_color %>">OPPORTUNITY</h5>
-            <h3 class="show-statistics-box-rating"><%= @opportunity_rating %> / 5</h3>
-          </div>
-          <div class="show-statistics-box">
-            <h5 class="show-statistics-box-title" style="background-color: <%= property_rating_color %>">PRICE</h5>
-            <h3 class="show-statistics-box-rating"><%= @property_rating %> / 5</h3>
-          </div>
-        </div>
       </div>
     </div>
-    <div class="show-content-right">
-      <%= link_to "Track Property", trackings_path(tracking: {property_id: @property,user_id: current_user}), method: :post, class: "btn btn-gemfinder" %>
-      <% if @property.photo? %>
-        <div class="show-card-right" style="background-image: url('<%= cl_image_path @property.photo, height: 300, width: 400 %>');background-size: cover;">
+      <div class="chart-container" style="display: flex; justify-content: space-between; padding: 0 15px;">
+        <div class="chart-container" style="height:35vh; width:45vw">
+          <canvas id="myBarChart" data-avg-current-first ="<%= @property.postcode.avg_current_first.gsub(/[\[\"\]]/, '') %>"></canvas>
         </div>
-        <div class="propery-show-text" >
-          <div class="property-price-link">
-          </div>
+        <div class="chart-container" style="height:35vh; width:45vw">
+          <canvas id="myBarCharts" data-avg-price-foot ="<%= @property.postcode.avg_price_foot.gsub(/[\[\"\]]/, '') %>"></canvas>
         </div>
-        <% else %>
-        <div class="show-card-right" style="background-image: url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cdc84c9290e90088f8ab78270ee1ffdf&auto=format&fit=crop&w=500&q=60');">
-          <% end %>
+      </div>
+      <div class="chart-container" style="display: flex; justify-content: space-between; margin-top: 40px; padding: 0 15px;">
+      <div class="chart-container"  style="height:35vh; width:45vw">
+        <canvas id="myChart" data-crime-rate="<%= @property.postcode.crime_rating %>"></canvas>
+      </div>
+    <br />
+    <br />
+    <br />
+    <br />
+      <div class="chart-container" style="height:35vh; width:45vw">
+        <canvas id="lineGraph" data-avg-paid ="<%= @property.postcode.avg_paid.first.gsub(/[\[\"\]]/, '') %>"</canvas>
+      </div>
     </div>
   </div>
-    <div class="chart-container" style="display: flex; justify-content: space-between; padding: 0 15px;">
-      <div class="chart-container" style="height:35vh; width:45vw">
-        <canvas id="myBarChart" data-avg-current-first ="<%= @property.postcode.avg_current_first.gsub(/[\[\"\]]/, '') %>"></canvas>
-      </div>
-      <div class="chart-container" style="height:35vh; width:45vw">
-        <canvas id="myBarCharts" data-avg-price-foot ="<%= @property.postcode.avg_price_foot.gsub(/[\[\"\]]/, '') %>"></canvas>
-      </div>
-    </div>
-    <div class="chart-container" style="display: flex; justify-content: space-between; margin-top: 40px; padding: 0 15px;">
-    <div class="chart-container"  style="height:35vh; width:45vw">
-      <canvas id="myChart" data-crime-rate="<%= @property.postcode.crime_rating %>"></canvas>
-    </div>
-  <br />
-  <br />
-  <br />
-  <br />
-    <div class="chart-container" style="height:35vh; width:45vw">
-      <canvas id="lineGraph" data-avg-paid ="<%= @property.postcode.avg_paid.first.gsub(/[\[\"\]]/, '') %>"</canvas>
-    </div>
-  </div>
-</div>
 </div>
 
 
