@@ -43,7 +43,7 @@
                       <p><i class="fas fa-car"></i>  <%= property.cars %></p>
                     </div> -->
                     <h3><%= address_parts[0] %></h3>
-                    <h6>£<%= property.price %></h6>
+                    <h6>£<%= number_with_delimiter(property.price, delimiter: ',') %></h6>
                   </div>
                   <p>
                     <% content_max_len = 170 %>

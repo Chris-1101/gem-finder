@@ -8,9 +8,6 @@
     <table>
       <div class="ui list">
         <% @similar_users.each do |user| %>
-        <div class="item">
-          <%= user.email %> <%= link_to "Message me!", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post" %>
-        </div>
         <% end %>
       </div>
     </table>
