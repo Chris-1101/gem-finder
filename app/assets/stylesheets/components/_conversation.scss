@@ -36,9 +36,10 @@
 .message-btn {
   width: 150px;
   height: 64px;
-  margin-right: 50px;
-  margin-top: 1px;
+
   font-size: 25px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
   // background-color: #E1E1E1;
 }
 .body-type {
@@ -59,7 +60,7 @@
 }
 
 .message_body {
-  padding-left: 25px;
+  margin: 0;
   flex: 1;
 }
 
@@ -103,7 +104,10 @@
 
 #new_message {
   display: flex;
-  padding-top: 20px;
-  padding-right: 50px;
-  padding-left: 270px;
+  width: 100%;
+  border-radius: 3px;
+}
+
+.msg-bdy {
+  width: 100%;
 }
