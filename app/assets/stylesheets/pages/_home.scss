@@ -25,9 +25,9 @@
   text-align: center;
   font-weight: bolder;
   font-size: 64px;
-  &:hover{
-    filter: blur(2px) opacity(80%);
-  }
+  // &:hover{
+  //   filter: blur(2px) opacity(80%);
+  // }
 }
 
 .tagline-text{
@@ -53,11 +53,14 @@
   position: relative;
 }
 
+.submit {
+  height: 36px !important;
+}
+
 .searchTerm {
   float: left;
   width: 100%;
   padding: 5px;
-  height: 36px;
   border-radius: 5px 0 0 5px;
   outline: none;
   color: #9DBFAF;
@@ -66,6 +69,7 @@
 }
 .search-button {
   display: flex;
+  height: 36px !important;
 }
 
 .searchTerm:focus{
@@ -93,3 +97,4 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
