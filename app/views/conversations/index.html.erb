@@ -74,7 +74,7 @@
       <% if @selected_convo %>
         <div class="body-type">
           <%= simple_form_for [@selected_convo, Message.new] do |f| %>
-            <%= f.input :body, placeholder: "type your message here..", label: false %>
+            <%= f.input :body, placeholder: "type your message here..", label: false, class: "msg-body" %>
             <%= f.submit "Send", class: "message-btn btn-success"  %>
           <% end %>
         </div>
