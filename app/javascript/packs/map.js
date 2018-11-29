@@ -17,8 +17,10 @@ if (mapElement) { // only build a map if there's a div#map to inject into
         .setLngLat([marker.lng, marker.lat])
         .addTo(map);
   });
-}
 
+  map.setZoom(10.7);
+  map.setCenter([-0.3, 51.52]);
+}
 
 const mapElementShow = document.getElementById('map-background-show');
 
@@ -70,9 +72,6 @@ const mapElementShow = document.getElementById('map-background-show');
   //   speed: 0.8,
   //   curve: .6
   // });
-
-  // map.setZoom(10.7);
-  // map.setCenter([-0.3, 51.52]);
 }
 
 const addressInput = document.getElementById('property_address');
