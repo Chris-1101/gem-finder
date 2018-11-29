@@ -1,3 +1,42 @@
-.db-image{
-  font-size: 25px;
+
+
+.dashboard-flex {
+  display: flex;
+}
+
+
+.dashboard-flex-item {
+  flex: 0 0 30%;
+  background: white;
+  border: 1px solid $colour-dark;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  margin: 10px 20px;
+  height: 400px;
+  position: sticky !important;
+  top: 120px;
+  padding: 30px;
+  h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+}
+
+.dashboard-button {
+  text-align: center;
+  font-size: 15px;
+  width: 200px;
+  padding: 15px 0;
+  background-color: #00ADB5;
+  border-radius: 3px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  margin-top: 30px;
+  display: inline-block;
+  &:hover{
+    color: white;
+    opacity: 0.9;
+    text-decoration: none;
+  }
 }

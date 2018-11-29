@@ -42,8 +42,7 @@
   top: -120px;
   background-color: white;
   border-radius: 3px;
-  height: 1200px;
-  z-index: 999999999;
+  height: 1350px;
 }
 
 .show-content-left {
@@ -168,4 +167,12 @@
 .show-statistics-container {
   display: flex;
   justify-content: space-around;
+}
+
+#myChart {
+  margin-top: 70px;
+}
+
+#lineGraph {
+  margin-top: 70px;
 }
