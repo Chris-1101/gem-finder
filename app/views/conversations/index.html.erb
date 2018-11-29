@@ -5,8 +5,12 @@
 
 <div class="container-fluid">
   <div class="row" style="height: 80vh;">
+    <div class="<%= @similar_users.empty? ? 'col-xs-12' : 'col-xs-3' %><%  %>">
       <div class="available-user-list">
         <h5>Users who are interested in a similar area to you</h5>
+        <% if @similar_users.empty? %>
+        <p><em>No users avaialble!</em></p>
+        <% end %>
         <% @similar_users.each do |user| %>
           <p> <%= user.name %> <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %> </p>
         <% end %>
@@ -37,10 +41,13 @@
           </div>
         <% end %>
       <% end %>
-
+    </div>
 
 
     <div class="col-xs-9">
+      <% if @conversations.empty? %>
+        <p><em>You have no current conversations!</em></p>
+      <% else %>
       <div class="message-display">
         <%if @selected_convo %>
           <%  @selected_convo.messages.each do |message| %>
@@ -73,6 +80,7 @@
         </div>
       <% end %>
     </div>
+    <% end %>
   </div>
 </div>
 
