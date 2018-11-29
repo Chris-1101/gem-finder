@@ -4,10 +4,10 @@
   // background: white;
   // height: 70px;
   background-color: $colour-light;
-  position: sticky;
+  position: fixed;
   z-index: 3;
   top: 0;
-
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -20,7 +20,7 @@
     <% end %>
     <% unread_messages = unread_messages.reject { |message| message.read || message.user_id == current_user.id }.count %>
     <% if unread_messages.zero? %>
-    <%= link_to "Messages", conversations_path, class: "navbar-wagon-item navbar-wagon-link-home" %>
+    <%= link_to "Messages", conversations_path, class: "home-link navbar-wagon-item navbar-wagon-link-home" %>
     <% else %>
 
 
@@ -41,12 +41,12 @@
 
 
 
-      <%= link_to "About Us", about_path, class: "navbar-wagon-item navbar-wagon-link-home" %>
-      <%= link_to "Properties", properties_path, class: "navbar-wagon-item navbar-wagon-link-home" %>
+      <%= link_to "About Us", about_path, class: "home-link navbar-wagon-item navbar-wagon-link-home" %>
+      <%= link_to "Properties", properties_path, class: "home-link navbar-wagon-item navbar-wagon-link-home" %>
       <% if params["controller"] == "properties" && params["action"] == "index" %>
         <a href="" class="navbar-wagon-item navbar-wagon-link-home" data-toggle="modal" data-target="#modalproperty">Create Listing</a>
       <% end %>
-      <%= link_to "How it works", contact_path, class: "navbar-wagon-item navbar-wagon-link-home" %>
+      <%= link_to "How it works", contact_path, class: "home-link navbar-wagon-item navbar-wagon-link-home" %>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
@@ -73,7 +73,7 @@
       </div>
     <% else %>
       <!-- Login link (when logged out) -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link-home" %>
+      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "home-link navbar-wagon-item navbar-wagon-link-home" %>
     <% end %>
   </div>
 
