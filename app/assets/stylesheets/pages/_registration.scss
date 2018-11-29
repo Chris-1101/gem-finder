@@ -1,0 +1,90 @@
+.profile-back {
+  width: 70%;
+  margin-left: 15%;
+  h2 {
+    text-align: center;
+    padding-left: 30px;
+    padding-top: 6px;
+
+    // padding-left: 20px;
+  }
+}
+
+.cancel-button {
+  background-color: #777777;
+  color: white;
+  text-align: center;
+}
+.cancel-button:hover {
+  background-color: grey;
+  color: white;
+  text-align: center;
+}
+
+.back-button {
+  background-color: #777777;
+  color: white
+}
+.back-button:hover {
+  background-color: grey;
+  color: white
+}
+
+.edit-banner {
+  color: white;
+  text-align: center;
+  height: 100vh;
+  /* if you have a 70px navbar => height: calc(100vh - 70px); */
+  background-size: cover !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.edit-banner h1 {
+  font-size: 50px;
+  font-weight: bold;
+  text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
+}
+.edit-banner p {
+  font-size: 25px;
+  font-weight: lighter;
+  color: rgb(255, 255, 255);
+  opacity: 0.6;
+  margin-bottom: 30px;
+  margin-bottom: 50px;
+}
+
+
+.edit-avatar {
+  border-radius: 50%;
+  height: 65px;
+  width: 65px;
+  margin-top: 20px;
+}
+
+.edit-btn {
+ background-color: black;
+ border-radius: 10%;
+ color: white;
+ font-size: 20px;
+ font-weight: bold;
+
+}
+.edit-btn:hover {
+ background-color: #2b2b28;
+ border-radius: 10%;
+ color: white;
+ font-size: 20px;
+ font-weight: bold;
+
+}
+
+.same-line {
+  display: flex;
+  margin-bottom: 35px;
+  padding-left: 250px;
+  margin-top: 20px;
+
+
+
+}
