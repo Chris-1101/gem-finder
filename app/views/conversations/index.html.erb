@@ -5,9 +5,8 @@
 
 <div class="container-fluid">
   <div class="row" style="height: 80vh;">
-    <div class="col-xs-3">
       <div class="available-user-list">
-        <h5>Available Users</h5>
+        <h5>Users who are interested in a similar area to you</h5>
         <% @similar_users.each do |user| %>
           <p> <%= user.name %> <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %> </p>
         <% end %>
@@ -22,10 +21,6 @@
             <div class="convo-select">
               <%= cl_image_tag recipient.photo if recipient.photo? %>
               <p class="convo-name"><%= recipient.name %> </p>
-              <% if conversation.messages.any? %>
-                <p class="slice"> <%= conversation.messages.last.body.slice!(0..10) %>..</p>
-              <% end %>
-            </div>
             <% unread_messages = [] %>
             <% conversation.messages.each do |message| %>
               <% unread_messages << message %>
@@ -38,10 +33,11 @@
                 <%= unread_messages %>
               </div>
             <% end %>
+            </div>
           </div>
         <% end %>
       <% end %>
-    </div>
+
 
 
     <div class="col-xs-9">
