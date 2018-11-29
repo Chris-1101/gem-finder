@@ -1,5 +1,5 @@
 .home-container {
-  background-image:  url('https://images.pexels.com/photos/259962/pexels-photo-259962.jpeg?auto=compress&cs=tinysrgb&w=1800&h=850');
+  background-image: linear-gradient(-225deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.3) 50%), url('https://images.pexels.com/photos/259962/pexels-photo-259962.jpeg?auto=compress&cs=tinysrgb&w=1800&h=850');
   background-position: absolute;
   background-size:cover;
   background-repeat: no-repeat;
@@ -15,7 +15,7 @@
   text-align: center;
   margin-left: 0px;
   font-weight: bold;
-  color: white;
+  color: #fafaf6;
 }
 
 
@@ -25,9 +25,9 @@
   text-align: center;
   font-weight: bolder;
   font-size: 64px;
-  &:hover{
-    filter: blur(2px) opacity(80%);
-  }
+  // &:hover{
+  //   filter: blur(2px) opacity(80%);
+  // }
 }
 
 .tagline-text{
@@ -35,7 +35,8 @@
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  color: rgb(180, 180, 180)
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 
 }
 .submit-button{
@@ -52,11 +53,14 @@
   position: relative;
 }
 
+.submit {
+  height: 36px !important;
+}
+
 .searchTerm {
   float: left;
   width: 100%;
   padding: 5px;
-  height: 36px;
   border-radius: 5px 0 0 5px;
   outline: none;
   color: #9DBFAF;
@@ -65,6 +69,7 @@
 }
 .search-button {
   display: flex;
+  height: 36px !important;
 }
 
 .searchTerm:focus{
@@ -92,3 +97,4 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+

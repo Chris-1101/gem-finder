@@ -6,5 +6,4 @@ class User < ApplicationRecord
   has_many :properties, through: :trackings
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
-
 end

@@ -5,9 +5,12 @@
 
 <div class="container-fluid">
   <div class="row" style="height: 80vh;">
-    <div class="col-xs-3">
+    <div class="<%= @similar_users.empty? ? 'col-xs-12' : 'col-xs-3' %><%  %>">
       <div class="available-user-list">
-        <h5>Available Users</h5>
+        <h5>Users who are interested in a similar area to you</h5>
+        <% if @similar_users.empty? %>
+        <p><em>No users avaialble!</em></p>
+        <% end %>
         <% @similar_users.each do |user| %>
           <p> <%= user.name %> <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %> </p>
         <% end %>
@@ -22,10 +25,6 @@
             <div class="convo-select">
               <%= cl_image_tag recipient.photo if recipient.photo? %>
               <p class="convo-name"><%= recipient.name %> </p>
-              <% if conversation.messages.any? %>
-                <p class="slice"> <%= conversation.messages.last.body.slice!(0..10) %>..</p>
-              <% end %>
-            </div>
             <% unread_messages = [] %>
             <% conversation.messages.each do |message| %>
               <% unread_messages << message %>
@@ -38,6 +37,7 @@
                 <%= unread_messages %>
               </div>
             <% end %>
+            </div>
           </div>
         <% end %>
       <% end %>
@@ -45,6 +45,9 @@
 
 
     <div class="col-xs-9">
+      <% if @conversations.empty? %>
+        <p><em>You have no current conversations!</em></p>
+      <% else %>
       <div class="message-display">
         <%if @selected_convo %>
           <%  @selected_convo.messages.each do |message| %>
@@ -71,12 +74,13 @@
       <% if @selected_convo %>
         <div class="body-type">
           <%= simple_form_for [@selected_convo, Message.new] do |f| %>
-            <%= f.input :body, placeholder: "type your message here..", label: false %>
+            <%= f.input :body, placeholder: "type your message here..", label: false, class: "msg-body" %>
             <%= f.submit "Send", class: "message-btn btn-success"  %>
           <% end %>
         </div>
       <% end %>
     </div>
+    <% end %>
   </div>
 </div>
 

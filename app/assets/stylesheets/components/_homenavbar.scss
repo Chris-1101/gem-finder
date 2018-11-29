@@ -114,3 +114,10 @@
   font-weight: bold;
   margin-top: 20px
 }
+
+.home-link{
+  &:hover{
+    color: white;
+    text-decoration: underline;
+  }
+}
