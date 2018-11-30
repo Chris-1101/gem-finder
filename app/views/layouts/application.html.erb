@@ -41,7 +41,9 @@
   <% end %>
     <%= render 'shared/user_modals' if params["controller"] == "properties" && params["action"] == "index" %>
 
-    <%= yield %>
+    <div class="page-offset">
+      <%= yield %>
+    </div>
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
     <%= javascript_pack_tag "map" %>

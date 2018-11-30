@@ -8,9 +8,6 @@
     <div class="<%= @similar_users.empty? ? 'col-xs-12' : 'col-xs-3' %><%  %>">
       <div class="available-user-list">
         <h5>Users who are interested in a similar area to you</h5>
-        <% if @similar_users.empty? %>
-        <p><em>No users avaialble!</em></p>
-        <% end %>
         <% @similar_users.each do |user| %>
           <p> <%= user.name %> <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %> </p>
         <% end %>
@@ -56,14 +53,14 @@
                 <%= cl_image_tag message.user.photo, class: "avatar-message" %>
                 <div class="message-<%= message.user == current_user ? "sender" : "recipient"  %>">
                   <p class="message-content"><%= message.body %></p>
-                  <p class="message-date"> <%= message&.created_at&.strftime('%F:%H:%M') %></p>
+                  <p class="message-date"> <%= time_ago_in_words(message&.created_at) %> ago</p>
                 </div>
               </div>
             <% else %>
               <div class="message-holder-<%= message.user == current_user ? "sender" : "recipient"  %>"">
                 <div class="message-<%= message.user == current_user ? "sender" : "recipient"  %>">
                   <p class="message-content"><%= message.body %></p>
-                  <p class="message-date"> <%= message&.created_at&.strftime('%F:%H:%M') %></p>
+                  <p class="message-date"> <%= time_ago_in_words(message&.created_at) %> ago</p>
                 </div>
                 <%= cl_image_tag message.user.photo, class: "avatar-message" %>
               </div>
