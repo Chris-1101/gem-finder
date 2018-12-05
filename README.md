@@ -1,1 +1,3 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+# GemFinder
+
+![gemfinder](https://user-images.githubusercontent.com/28808441/49532367-9dd01500-f8bc-11e8-8c51-1e95e54e09e6.png)
